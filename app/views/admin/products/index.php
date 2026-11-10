@@ -21,34 +21,53 @@ foreach ($categories as $category) {
     }
 }
 ?>
-<div class="admin-toolbar">
-    <form class="admin-search" method="GET" action="<?= e(admin_url('produits')) ?>" role="search">
+<div class="admin-toolbar admin-toolbar--products">
+    <form class="admin-filters" method="GET" action="<?= e(admin_url('produits')) ?>" role="search">
         <?= route_field((string) config('admin_path') . '/produits') ?>
-        <span class="admin-search-icon"><?= icon('search', 'icon icon--sm') ?></span>
-        <label class="visually-hidden" for="adminProductSearch">Rechercher un produit</label>
-        <input
-            id="adminProductSearch"
-            type="search"
-            name="q"
-            value="<?= e($search) ?>"
-            placeholder="Titre ou slug…"
-            autocomplete="off"
-        >
-        <label class="visually-hidden" for="adminProductCategory">Filtrer par catégorie</label>
-        <select
-            id="adminProductCategory"
-            class="admin-search-select"
-            name="categorie"
-            data-auto-submit
-        >
-            <option value="0">Toutes les catégories</option>
-            <?php foreach ($categories as $category): ?>
-                <option value="<?= (int) $category['id'] ?>"<?= $categoryId === (int) $category['id'] ? ' selected' : '' ?>>
-                    <?= e($category['name']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-        <button class="btn btn--dark btn--compact" type="submit">Chercher</button>
+
+        <label class="admin-filter admin-filter--search">
+            <span class="admin-filter-label">Rechercher</span>
+            <span class="admin-filter-input">
+                <?= icon('search', 'icon icon--sm') ?>
+                <input
+                    id="adminProductSearch"
+                    type="search"
+                    name="q"
+                    value="<?= e($search) ?>"
+                    placeholder="Titre ou slug…"
+                    autocomplete="off"
+                >
+            </span>
+        </label>
+
+        <label class="admin-filter admin-filter--category">
+            <span class="admin-filter-label">Catégorie</span>
+            <select
+                id="adminProductCategory"
+                class="admin-filter-select"
+                name="categorie"
+                data-auto-submit
+            >
+                <option value="0">Toutes les catégories</option>
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?= (int) $category['id'] ?>"<?= $categoryId === (int) $category['id'] ? ' selected' : '' ?>>
+                        <?= e($category['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </label>
+
+        <div class="admin-filter-actions">
+            <button class="btn btn--dark btn--compact" type="submit">
+                <?= icon('search', 'icon icon--sm') ?>
+                Chercher
+            </button>
+            <?php if ($search !== '' || $categoryId > 0): ?>
+                <a class="admin-filter-reset" href="<?= e(admin_url('produits')) ?>">
+                    Réinitialiser
+                </a>
+            <?php endif; ?>
+        </div>
     </form>
 
     <a class="btn btn--primary btn--compact admin-toolbar-new" href="<?= e(admin_url('produits/nouveau')) ?>">

@@ -754,6 +754,84 @@
 (function () {
     'use strict';
 
+    /* ---------- Admin: category icon picker ---------------------- */
+    Array.prototype.forEach.call(document.querySelectorAll('[data-icon-select]'), function (root) {
+        var native = root.querySelector('[data-icon-native]');
+        var ui = root.querySelector('[data-icon-ui]');
+        var toggle = root.querySelector('[data-icon-toggle]');
+        var menu = root.querySelector('[data-icon-menu]');
+        var preview = root.querySelector('[data-icon-preview]');
+        var valueLabel = root.querySelector('[data-icon-value]');
+
+        if (!native || !ui || !toggle || !menu || !preview || !valueLabel) {
+            return;
+        }
+
+        var closeMenu = function () {
+            menu.hidden = true;
+            toggle.setAttribute('aria-expanded', 'false');
+            root.classList.remove('is-open');
+        };
+
+        native.hidden = true;
+        ui.hidden = false;
+
+        toggle.addEventListener('click', function () {
+            var willOpen = menu.hidden;
+
+            menu.hidden = !willOpen;
+            toggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+            root.classList.toggle('is-open', willOpen);
+
+            if (willOpen) {
+                var selected = menu.querySelector('.icon-select-option.is-selected');
+
+                if (selected) {
+                    selected.scrollIntoView({ block: 'nearest' });
+                }
+            }
+        });
+
+        Array.prototype.forEach.call(menu.querySelectorAll('[data-icon-option]'), function (option) {
+            option.addEventListener('click', function () {
+                var value = option.getAttribute('data-value') || '';
+                var label = option.getAttribute('data-label') || '';
+                var optionIcon = option.querySelector('.icon-select-option-icon');
+
+                native.value = value;
+                valueLabel.textContent = label;
+                preview.classList.toggle('is-empty', value === '');
+
+                if (optionIcon) {
+                    preview.innerHTML = optionIcon.innerHTML;
+                }
+
+                Array.prototype.forEach.call(menu.querySelectorAll('.icon-select-option'), function (item) {
+                    var isSelected = item === option;
+                    item.classList.toggle('is-selected', isSelected);
+                    item.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+                });
+
+                native.dispatchEvent(new Event('change', { bubbles: true }));
+                closeMenu();
+                toggle.focus();
+            });
+        });
+
+        document.addEventListener('click', function (event) {
+            if (!root.contains(event.target)) {
+                closeMenu();
+            }
+        });
+
+        root.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeMenu();
+                toggle.focus();
+            }
+        });
+    });
+
     /* ---------- Admin: category picker with icons ---------------- */
     var categoryPicker = document.querySelector('[data-category-picker]');
     var categoryNative = document.querySelector('[data-category-native]');

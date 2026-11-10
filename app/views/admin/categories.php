@@ -23,15 +23,15 @@ declare(strict_types=1);
             <input class="input" type="text" name="name" maxlength="100" required placeholder="Ex. Chemises">
         </label>
 
-        <label class="field">
+        <div class="field">
             <span class="field-label">Icône</span>
-            <select class="input" name="icon">
-                <option value="">Aucune</option>
-                <?php foreach ($icons as $value => $label): ?>
-                    <option value="<?= e($value) ?>"><?= e($label) ?></option>
-                <?php endforeach; ?>
-            </select>
-        </label>
+            <?php partial('partials/icon-picker', [
+                'pickerId'    => 'newCategoryIcon',
+                'pickerName'  => 'icon',
+                'pickerValue' => '',
+                'pickerIcons' => $icons,
+            ]); ?>
+        </div>
 
         <label class="field field--small">
             <span class="field-label">Ordre</span>

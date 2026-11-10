@@ -273,8 +273,9 @@ configuration du serveur.
 
 - Aucun framework, aucune dépendance Composer, aucun build.
 - Icônes SVG inline : pas de requête supplémentaire.
-- Images produits en `loading="lazy"`, `decoding="async"` et `contain` dans
-  les cartes pour ne jamais couper le vêtement.
+- Images produits en `loading="lazy"`, `decoding="async"` ; les cartes
+  remplissent leur cadre (`cover`) et la fiche produit affiche l’image
+  entière (`contain`).
 - Assets versionnés par `filemtime`, ce qui autorise un cache navigateur long.
 - Index MySQL sur les colonnes filtrées et triées.
 - Panier et favoris en session : aucune écriture en base à chaque clic.

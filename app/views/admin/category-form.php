@@ -43,16 +43,16 @@ $isActive = (string) ($category['is_active'] ?? '1') === '1';
                 <?php if (isset($errors['slug'])): ?><span class="field-error"><?= e($errors['slug']) ?></span><?php endif; ?>
             </label>
 
-            <label class="field">
+            <div class="field">
                 <span class="field-label">Icône</span>
-                <select class="input" name="icon">
-                    <option value="">Aucune</option>
-                    <?php foreach ($icons as $value => $label): ?>
-                        <option value="<?= e($value) ?>"<?= (string) $category['icon'] === $value ? ' selected' : '' ?>><?= e($label) ?></option>
-                    <?php endforeach; ?>
-                </select>
+                <?php partial('partials/icon-picker', [
+                    'pickerId'    => 'editCategoryIcon',
+                    'pickerName'  => 'icon',
+                    'pickerValue' => (string) ($category['icon'] ?? ''),
+                    'pickerIcons' => $icons,
+                ]); ?>
                 <span class="field-hint">Affichée dans le menu latéral et dans les raccourcis de l’accueil.</span>
-            </label>
+            </div>
 
             <label class="field">
                 <span class="field-label">Ordre d’affichage</span>

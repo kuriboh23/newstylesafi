@@ -1,0 +1,2 @@
+[2026-11-10 20:00:06] PDOException: Connexion à la base de données impossible. in A:\Xampp\htdocs\newstylesafi\app\core\Database.php:101
+
