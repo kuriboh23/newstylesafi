@@ -37,6 +37,7 @@ $wishCount   = $wishCount ?? 0;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="csrf-token" content="<?= e(csrf_token()) ?>">
 
     <title><?= e($pageTitle) ?></title>
     <meta name="description" content="<?= e($pageDesc) ?>">
@@ -45,7 +46,7 @@ $wishCount   = $wishCount ?? 0;
     <?php endif; ?>
     <link rel="canonical" href="<?= e($canonicalUrl) ?>">
 
-    <meta name="theme-color" content="#FAF6EF">
+    <meta name="theme-color" content="#FFFFFF">
     <meta name="format-detection" content="telephone=no">
 
     <meta property="og:type" content="website">

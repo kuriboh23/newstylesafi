@@ -44,14 +44,27 @@ $categoryUrl = !empty($product['category_slug']) ? url('/categorie/' . $product[
     <div class="product-layout">
         <div class="product-gallery">
             <div class="gallery-main">
-                <img
-                    id="galleryMainImage"
-                    src="<?= e($mainImage) ?>"
-                    alt="<?= e($product['title']) ?>"
-                    class="gallery-image"
-                    width="600"
-                    height="750"
+                <button
+                    type="button"
+                    class="gallery-open"
+                    data-lightbox-open
+                    aria-label="Agrandir la photo de <?= e($product['title']) ?>"
                 >
+                    <img
+                        id="galleryMainImage"
+                        src="<?= e($mainImage) ?>"
+                        alt="<?= e($product['title']) ?>"
+                        class="gallery-image"
+                        width="600"
+                        height="750"
+                        fetchpriority="high"
+                        decoding="async"
+                    >
+                    <span class="gallery-zoom-hint" aria-hidden="true">
+                        <?= icon('search', 'icon icon--sm') ?>
+                        Agrandir
+                    </span>
+                </button>
                 <?php if ($discount > 0): ?>
                     <span class="sale-stamp">-<?= $discount ?>%</span>
                 <?php endif; ?>
@@ -74,13 +87,29 @@ $categoryUrl = !empty($product['category_slug']) ? url('/categorie/' . $product[
         </div>
 
         <div class="product-details">
-            <?php if (!empty($product['category_name']) && $categoryUrl !== null): ?>
-                <p class="product-category">
-                    <a href="<?= e($categoryUrl) ?>"><?= e($product['category_name']) ?></a>
-                </p>
-            <?php endif; ?>
+            <div class="product-heading">
+                <div class="product-heading-text">
+                    <?php if (!empty($product['category_name']) && $categoryUrl !== null): ?>
+                        <p class="product-category">
+                            <a href="<?= e($categoryUrl) ?>"><?= e($product['category_name']) ?></a>
+                        </p>
+                    <?php endif; ?>
 
-            <h1 class="product-detail-title"><?= e($product['title']) ?></h1>
+                    <h1 class="product-detail-title"><?= e($product['title']) ?></h1>
+                </div>
+
+                <button
+                    type="button"
+                    class="wish-toggle<?= $isWished ? ' is-active' : '' ?>"
+                    data-wish-slug="<?= e($product['slug']) ?>"
+                    data-wishlist-url="<?= e(url('/favoris/ajouter')) ?>"
+                    aria-pressed="<?= $isWished ? 'true' : 'false' ?>"
+                    aria-label="<?= $isWished ? 'Retirer des favoris' : 'Ajouter aux favoris' ?>"
+                >
+                    <?= icon('heart', 'icon icon--sm') ?>
+                    <span class="wish-toggle-label"><?= $isWished ? 'Dans mes favoris' : 'Ajouter aux favoris' ?></span>
+                </button>
+            </div>
 
             <div class="product-price-block">
                 <span class="price current"><?= e(format_price($price)) ?></span>
@@ -104,6 +133,7 @@ $categoryUrl = !empty($product['category_slug']) ? url('/categorie/' . $product[
                 method="POST"
                 data-checkout-url="<?= e(url('/commande')) ?>"
             >
+                <?= csrf_field() ?>
                 <input type="hidden" name="slug" value="<?= e($product['slug']) ?>">
                 <input type="hidden" name="size" id="selectedSize" value="<?= e($sizes[0] ?? '') ?>">
                 <input type="hidden" name="color" id="selectedColor" value="<?= e($colors[0]['name'] ?? '') ?>">
@@ -160,17 +190,6 @@ $categoryUrl = !empty($product['category_slug']) ? url('/categorie/' . $product[
                     </div>
                 <?php endif; ?>
             </form>
-
-            <button
-                type="button"
-                class="wish-toggle<?= $isWished ? ' is-active' : '' ?>"
-                data-wish-slug="<?= e($product['slug']) ?>"
-                data-wishlist-url="<?= e(url('/favoris/ajouter')) ?>"
-                aria-pressed="<?= $isWished ? 'true' : 'false' ?>"
-            >
-                <?= icon('heart', 'icon icon--sm') ?>
-                <span><?= $isWished ? 'Dans mes favoris' : 'Ajouter aux favoris' ?></span>
-            </button>
 
             <div class="trust-badges">
                 <div class="trust-item"><?= icon('whatsapp', 'icon icon--sm') ?><span>Commande sur WhatsApp</span></div>
@@ -261,4 +280,24 @@ $categoryUrl = !empty($product['category_slug']) ? url('/categorie/' . $product[
             </ul>
         </section>
     <?php endif; ?>
+
+    <div
+        class="lightbox"
+        id="productLightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Photos de <?= e($product['title']) ?>"
+        hidden
+    >
+        <button type="button" class="lightbox-btn lightbox-close" data-lightbox-close aria-label="Fermer la photo">
+            <?= icon('close', 'icon') ?>
+        </button>
+        <button type="button" class="lightbox-btn lightbox-prev" data-lightbox-prev aria-label="Photo précédente">
+            <?= icon('chevron-left', 'icon') ?>
+        </button>
+        <img class="lightbox-image" data-lightbox-image src="<?= e($mainImage) ?>" alt="<?= e($product['title']) ?>">
+        <button type="button" class="lightbox-btn lightbox-next" data-lightbox-next aria-label="Photo suivante">
+            <?= icon('chevron-right', 'icon') ?>
+        </button>
+    </div>
 </section>

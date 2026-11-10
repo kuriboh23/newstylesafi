@@ -74,24 +74,55 @@ $categoryIcon = static function (array $category): string {
 
 <section class="wrap home-offer" aria-labelledby="offerTitle">
     <div class="offer-panel">
+        <span class="offer-orbit" aria-hidden="true"></span>
         <span class="offer-glow" aria-hidden="true"></span>
 
         <div class="offer-copy">
-            <span class="offer-badge"><?= icon('tag', 'icon icon--sm') ?> <?= e($promo['badge'] ?? 'Offre limitée') ?></span>
+            <span class="offer-badge"><?= icon('sparkle', 'icon icon--sm') ?> <?= e($promo['badge'] ?? 'Nouveautés') ?></span>
             <h2 class="offer-title" id="offerTitle"><?= e($promo['title'] ?? '') ?></h2>
             <p class="offer-text"><?= e($promo['text'] ?? '') ?></p>
 
-            <a class="btn btn--dark btn--compact offer-cta" href="<?= e(url($promo['link'] ?? '/produits')) ?>">
-                <?= e($promo['cta'] ?? 'Commander') ?>
-                <?= icon('arrow-right', 'icon icon--sm') ?>
-            </a>
+            <div class="offer-actions">
+                <a class="btn btn--primary btn--compact offer-cta" href="<?= e(url($promo['link'] ?? '/produits')) ?>">
+                    <?= e($promo['cta'] ?? 'Commander') ?>
+                    <?= icon('arrow-right', 'icon icon--sm') ?>
+                </a>
+                <span class="offer-assurance">
+                    <?= icon('check-circle', 'icon icon--sm') ?>
+                    Confirmation directe par la boutique
+                </span>
+            </div>
+
+            <?php if ($offerEnd !== null): ?>
+                <div class="offer-timer">
+                    <?php partial('partials/countdown', ['endAt' => $offerEnd, 'label' => (string) ($promo['countdown_label'] ?? 'Fin de l’offre dans')]); ?>
+                </div>
+            <?php endif; ?>
         </div>
 
-        <?php if ($offerEnd !== null): ?>
-            <div class="offer-timer">
-                <?php partial('partials/countdown', ['endAt' => $offerEnd, 'label' => (string) ($promo['countdown_label'] ?? 'Fin de l’offre dans')]); ?>
-            </div>
-        <?php endif; ?>
+        <ol class="offer-steps" aria-label="Commander en trois étapes">
+            <li class="offer-step">
+                <span class="offer-step-num" aria-hidden="true">01</span>
+                <span class="offer-step-text">
+                    <strong>Choisir</strong>
+                    <span>Taille et couleur sur la fiche.</span>
+                </span>
+            </li>
+            <li class="offer-step">
+                <span class="offer-step-num" aria-hidden="true">02</span>
+                <span class="offer-step-text">
+                    <strong>Envoyer</strong>
+                    <span>Votre commande part sur WhatsApp.</span>
+                </span>
+            </li>
+            <li class="offer-step">
+                <span class="offer-step-num" aria-hidden="true">03</span>
+                <span class="offer-step-text">
+                    <strong>Confirmer</strong>
+                    <span>La boutique vous répond directement.</span>
+                </span>
+            </li>
+        </ol>
     </div>
 </section>
 
@@ -136,25 +167,29 @@ $categoryIcon = static function (array $category): string {
 
 <section class="section why-section" aria-labelledby="whyTitle">
     <div class="wrap">
-        <div class="why-head">
-            <div class="why-head-main">
-                <p class="eyebrow"><?= e((string) ($why['eyebrow'] ?? '')) ?></p>
-                <h2 class="section-title" id="whyTitle"><?= e((string) ($why['title'] ?? '')) ?></h2>
+        <div class="why-shell">
+            <div class="why-head">
+                <div class="why-head-main">
+                    <p class="eyebrow"><?= e((string) ($why['eyebrow'] ?? '')) ?></p>
+                    <h2 class="section-title" id="whyTitle"><?= e((string) ($why['title'] ?? '')) ?></h2>
+                </div>
+                <p class="why-lead">
+                    <?= e((string) ($why['lead'] ?? '')) ?>
+                </p>
             </div>
-            <p class="why-lead">
-                <?= e((string) ($why['lead'] ?? '')) ?>
-            </p>
-        </div>
 
-        <div class="why-grid">
-            <?php foreach ($whyUs as $index => $item): ?>
-                <article class="why-card">
-                    <span class="why-icon"><?= icon((string) ($item['icon'] ?? '')) ?></span>
-                    <span class="why-index" aria-hidden="true"><?= str_pad((string) ((int) $index + 1), 2, '0', STR_PAD_LEFT) ?></span>
-                    <h3 class="why-title"><?= e($item['title']) ?></h3>
-                    <p class="why-text"><?= e($item['text']) ?></p>
-                </article>
-            <?php endforeach; ?>
+            <div class="why-grid">
+                <?php foreach ($whyUs as $index => $item): ?>
+                    <article class="why-card">
+                        <span class="why-icon"><?= icon((string) ($item['icon'] ?? '')) ?></span>
+                        <span class="why-index" aria-hidden="true"><?= str_pad((string) ((int) $index + 1), 2, '0', STR_PAD_LEFT) ?></span>
+                        <div class="why-body">
+                            <h3 class="why-title"><?= e($item['title']) ?></h3>
+                            <p class="why-text"><?= e($item['text']) ?></p>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
 </section>

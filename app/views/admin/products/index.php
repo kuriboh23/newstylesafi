@@ -7,9 +7,19 @@ declare(strict_types=1);
  *
  * @var array<int, array<string, mixed>> $products
  * @var string $search
+ * @var array<int, array<string, mixed>> $categories
+ * @var int $categoryId
  */
 
-$count = count($products);
+$count              = count($products);
+$activeCategoryName = '';
+
+foreach ($categories as $category) {
+    if ((int) $category['id'] === $categoryId) {
+        $activeCategoryName = (string) $category['name'];
+        break;
+    }
+}
 ?>
 <div class="admin-toolbar">
     <form class="admin-search" method="GET" action="<?= e(admin_url('produits')) ?>" role="search">
@@ -21,9 +31,23 @@ $count = count($products);
             type="search"
             name="q"
             value="<?= e($search) ?>"
-            placeholder="Titre ou référence…"
+            placeholder="Titre ou slug…"
             autocomplete="off"
         >
+        <label class="visually-hidden" for="adminProductCategory">Filtrer par catégorie</label>
+        <select
+            id="adminProductCategory"
+            class="admin-search-select"
+            name="categorie"
+            data-auto-submit
+        >
+            <option value="0">Toutes les catégories</option>
+            <?php foreach ($categories as $category): ?>
+                <option value="<?= (int) $category['id'] ?>"<?= $categoryId === (int) $category['id'] ? ' selected' : '' ?>>
+                    <?= e($category['name']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
         <button class="btn btn--dark btn--compact" type="submit">Chercher</button>
     </form>
 
@@ -37,6 +61,9 @@ $count = count($products);
     <?= $count ?> <?= $count === 1 ? 'produit' : 'produits' ?>
     <?php if ($search !== ''): ?>
         pour « <?= e($search) ?> »
+    <?php endif; ?>
+    <?php if ($activeCategoryName !== ''): ?>
+        dans <?= e($activeCategoryName) ?>
     <?php endif; ?>
 </p>
 

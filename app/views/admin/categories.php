@@ -35,7 +35,7 @@ declare(strict_types=1);
 
         <label class="field field--small">
             <span class="field-label">Ordre</span>
-            <input class="input" type="number" name="sort_order" value="0" step="1">
+            <input class="input" type="number" name="sort_order" value="1" min="1" step="1">
         </label>
 
         <label class="admin-check">

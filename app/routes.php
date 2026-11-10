@@ -72,5 +72,10 @@ $router->get($adminPath . '/categories/{id}/modifier', [AdminController::class, 
 $router->post($adminPath . '/categories/{id}/modifier', [AdminController::class, 'updateCategory']);
 $router->post($adminPath . '/categories/{id}/supprimer', [AdminController::class, 'deleteCategory']);
 
+// Footer social accounts
+$router->get($adminPath . '/reseaux', [AdminController::class, 'socialLinks']);
+$router->post($adminPath . '/reseaux', [AdminController::class, 'addSocialLink']);
+$router->post($adminPath . '/reseaux/{id}/supprimer', [AdminController::class, 'deleteSocialLink']);
+
 // Anything else -> 404 page.
 $router->notFound([ErrorController::class, 'notFound']);

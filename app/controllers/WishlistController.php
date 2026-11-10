@@ -32,7 +32,16 @@ final class WishlistController
         $payload = json_decode($raw, true);
         $payload = is_array($payload) ? $payload : $_POST;
 
-        $slug = trim((string) ($payload['slug'] ?? ''), '/');
+        $slug  = trim((string) ($payload['slug'] ?? ''), '/');
+        $token = $payload['_csrf'] ?? ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? null);
+
+        if (!csrf_verify($token)) {
+            http_response_code(419);
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['ok' => false, 'error' => 'Session expirée. Merci de recharger la page.']);
+
+            return;
+        }
 
         if ($slug === '' || Product::findBySlug($slug) === null) {
             http_response_code(404);

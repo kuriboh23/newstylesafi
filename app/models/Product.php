@@ -434,7 +434,7 @@ final class Product
      *
      * @return array<int, array<string, mixed>>
      */
-    public static function adminAll(string $search = '', int $limit = 100): array
+    public static function adminAll(string $search = '', int $limit = 100, int $categoryId = 0): array
     {
         $sql = "SELECT p.id, p.title, p.slug, p.price, p.sale_price, p.stock,
                        p.is_active, p.is_featured, p.is_flash, p.created_at,
@@ -443,12 +443,22 @@ final class Product
                 LEFT JOIN categories c ON c.id = p.category_id
                 LEFT JOIN product_images pi ON pi.product_id = p.id AND pi.is_primary = 1";
 
-        $params = [];
+        $conditions = [];
+        $params     = [];
 
         if ($search !== '') {
-            $sql .= ' WHERE p.title LIKE :titleSearch OR p.slug LIKE :slugSearch';
+            $conditions[] = '(p.title LIKE :titleSearch OR p.slug LIKE :slugSearch)';
             $params['titleSearch'] = '%' . $search . '%';
             $params['slugSearch']  = '%' . $search . '%';
+        }
+
+        if ($categoryId > 0) {
+            $conditions[] = 'p.category_id = :categoryId';
+            $params['categoryId'] = $categoryId;
+        }
+
+        if ($conditions !== []) {
+            $sql .= ' WHERE ' . implode(' AND ', $conditions);
         }
 
         $sql .= ' ORDER BY p.created_at DESC, p.id DESC LIMIT :limit';
@@ -592,7 +602,83 @@ final class Product
         return (int) ($row['total'] ?? 0) > 0;
     }
 
-    public static function setPrimaryImage(int $productId, string $path): void
+    /**
+     * Gallery rows with their id, used by the admin editor.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public static function adminImages(int $productId): array
+    {
+        return Database::select(
+            'SELECT id, image_path, sort_order, is_primary
+             FROM product_images
+             WHERE product_id = :id
+             ORDER BY is_primary DESC, sort_order ASC, id ASC',
+            ['id' => $productId]
+        );
+    }
+
+    /**
+     * Append one picture to a product gallery.
+     */
+    public static function addImage(int $productId, string $path): int
+    {
+        $row = Database::first(
+            'SELECT COALESCE(MAX(sort_order), 0) AS max_sort FROM product_images WHERE product_id = :id',
+            ['id' => $productId]
+        );
+
+        Database::execute(
+            'INSERT INTO product_images (product_id, image_path, sort_order, is_primary)
+             VALUES (:product_id, :image_path, :sort_order, 0)',
+            [
+                'product_id' => $productId,
+                'image_path' => $path,
+                'sort_order' => (int) ($row['max_sort'] ?? 0) + 1,
+            ]
+        );
+
+        return (int) Database::pdo()->lastInsertId();
+    }
+
+    /**
+     * Remove one picture and promote another one when it was the primary.
+     */
+    public static function deleteImage(int $productId, int $imageId): void
+    {
+        $row = Database::first(
+            'SELECT image_path, is_primary FROM product_images WHERE id = :id AND product_id = :product_id',
+            ['id' => $imageId, 'product_id' => $productId]
+        );
+
+        if ($row === null) {
+            return;
+        }
+
+        Database::execute(
+            'DELETE FROM product_images WHERE id = :id AND product_id = :product_id',
+            ['id' => $imageId, 'product_id' => $productId]
+        );
+
+        $path = (string) ($row['image_path'] ?? '');
+
+        if (str_starts_with($path, 'uploads/products/')) {
+            $file = PUBLIC_PATH . '/' . $path;
+
+            if (is_file($file)) {
+                @unlink($file);
+            }
+        }
+
+        if (!empty($row['is_primary'])) {
+            self::ensurePrimaryImage($productId);
+        }
+    }
+
+    /**
+     * Choose an existing gallery row as the main picture.
+     */
+    public static function setPrimaryImageId(int $productId, int $imageId): void
     {
         Database::execute(
             'UPDATE product_images SET is_primary = 0 WHERE product_id = :id',
@@ -600,10 +686,33 @@ final class Product
         );
 
         Database::execute(
-            'INSERT INTO product_images (product_id, image_path, sort_order, is_primary)
-             VALUES (:product_id, :image_path, 0, 1)',
-            ['product_id' => $productId, 'image_path' => $path]
+            'UPDATE product_images SET is_primary = 1 WHERE id = :image_id AND product_id = :id',
+            ['id' => $productId, 'image_id' => $imageId]
         );
+    }
+
+    /**
+     * Guarantee that a product with pictures always has one primary image.
+     */
+    public static function ensurePrimaryImage(int $productId): void
+    {
+        $primary = Database::first(
+            'SELECT id FROM product_images WHERE product_id = :id AND is_primary = 1 LIMIT 1',
+            ['id' => $productId]
+        );
+
+        if ($primary !== null) {
+            return;
+        }
+
+        $first = Database::first(
+            'SELECT id FROM product_images WHERE product_id = :id ORDER BY sort_order ASC, id ASC LIMIT 1',
+            ['id' => $productId]
+        );
+
+        if ($first !== null) {
+            self::setPrimaryImageId($productId, (int) $first['id']);
+        }
     }
 
     public static function nextFlashEnd(): ?string

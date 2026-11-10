@@ -34,6 +34,13 @@ final class CartController
     public function add(): void
     {
         $payload = $this->payload();
+
+        if (!$this->verifyCsrf($payload)) {
+            $this->respond(['ok' => false, 'error' => 'Session expirée. Merci de recharger la page.'], 419);
+
+            return;
+        }
+
         $slug    = trim((string) ($payload['slug'] ?? ''), '/');
         $quantity = isset($payload['quantity']) && ctype_digit((string) $payload['quantity'])
             ? (int) $payload['quantity']
@@ -79,6 +86,13 @@ final class CartController
     public function remove(): void
     {
         $payload = $this->payload();
+
+        if (!$this->verifyCsrf($payload)) {
+            $this->respond(['ok' => false, 'error' => 'Session expirée. Merci de recharger la page.'], 419);
+
+            return;
+        }
+
         $slug    = trim((string) ($payload['slug'] ?? ''), '/');
 
         if ($slug === '') {
@@ -98,7 +112,14 @@ final class CartController
 
     public function update(): void
     {
-        $payload  = $this->payload();
+        $payload = $this->payload();
+
+        if (!$this->verifyCsrf($payload)) {
+            $this->respond(['ok' => false, 'error' => 'Session expirée. Merci de recharger la page.'], 419);
+
+            return;
+        }
+
         $slug     = trim((string) ($payload['slug'] ?? ''), '/');
         $quantity = (int) ($payload['quantity'] ?? 0);
 
@@ -290,6 +311,14 @@ final class CartController
 
     public function empty(): void
     {
+        $payload = $this->payload();
+
+        if (!$this->verifyCsrf($payload)) {
+            $this->respond(['ok' => false, 'error' => 'Session expirée. Merci de recharger la page.'], 419);
+
+            return;
+        }
+
         Cart::clear();
 
         $this->respond([
@@ -297,6 +326,16 @@ final class CartController
             'cartCount' => 0,
             'message'   => 'Panier vidé',
         ], 200, '/panier');
+    }
+
+    /**
+     * State-changing storefront requests must carry the session token.
+     *
+     * @param array<string, mixed> $payload
+     */
+    private function verifyCsrf(array $payload): bool
+    {
+        return csrf_verify($payload['_csrf'] ?? ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? null));
     }
 
     /**

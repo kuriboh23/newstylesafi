@@ -8,15 +8,14 @@ use App\Core\Session;
 use App\Core\View;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\Setting;
-use App\Models\SiteContent;
+use App\Models\SocialLink;
 
 /**
  * Store admin panel.
  *
  * Single-password access configured through ADMIN_EMAIL / ADMIN_PASSWORD.
  * Everything the owner touches daily is reachable in one tap on a phone:
- * dashboard, products, categories, settings.
+ * dashboard, products, categories and footer social accounts.
  */
 final class AdminController
 {
@@ -60,6 +59,25 @@ final class AdminController
 
     public function login(): void
     {
+        Session::start();
+
+        $lockedUntil = (int) Session::get('admin_login_lock', 0);
+
+        if ($lockedUntil > time()) {
+            http_response_code(429);
+            header('Retry-After: 600');
+
+            View::render('admin/login', [
+                'title'     => 'Connexion — Gestion ' . config('app_name'),
+                'adminAuth' => true,
+                'noindex'   => true,
+                'email'     => '',
+                'error'     => 'Trop de tentatives. Réessayez dans quelques minutes.',
+            ], 'layouts/admin');
+
+            return;
+        }
+
         $email    = mb_strtolower(trim((string) ($_POST['email'] ?? '')));
         $password = (string) ($_POST['password'] ?? '');
 
@@ -72,6 +90,13 @@ final class AdminController
             && hash_equals($expectedPassword, $password);
 
         if (!$valid) {
+            $attempts = (int) Session::get('admin_login_attempts', 0) + 1;
+            Session::set('admin_login_attempts', $attempts);
+
+            if ($attempts >= 5) {
+                Session::set('admin_login_lock', time() + 600);
+            }
+
             usleep(300000);
 
             http_response_code(422);
@@ -87,7 +112,8 @@ final class AdminController
             return;
         }
 
-        Session::start();
+        Session::remove('admin_login_attempts');
+        Session::remove('admin_login_lock');
         session_regenerate_id(true);
         Session::set(self::SESSION_KEY, ['email' => $expectedEmail, 'at' => time()]);
 
@@ -133,15 +159,26 @@ final class AdminController
     {
         $this->requireAdmin();
 
-        $search = mb_substr(trim((string) ($_GET['q'] ?? '')), 0, 60);
+        $search     = mb_substr(trim((string) ($_GET['q'] ?? '')), 0, 60);
+        $categories = Category::adminAll();
+        $categoryId = max(0, (int) ($_GET['categorie'] ?? 0));
+
+        if ($categoryId > 0 && !in_array($categoryId, array_map(
+            static fn (array $category): int => (int) $category['id'],
+            $categories
+        ), true)) {
+            $categoryId = 0;
+        }
 
         View::render('admin/products/index', [
             'title'       => 'Produits — Gestion ' . config('app_name'),
             'adminActive' => 'products',
             'adminTitle'  => 'Produits',
             'noindex'     => true,
-            'products'    => Product::adminAll($search, 100),
+            'products'    => Product::adminAll($search, 100, $categoryId),
             'search'      => $search,
+            'categories'  => $categories,
+            'categoryId'  => $categoryId,
         ], 'layouts/admin');
     }
 
@@ -226,7 +263,6 @@ final class AdminController
             'is_active'    => isset($post['is_active']) ? 1 : 0,
             'is_featured'  => isset($post['is_featured']) ? 1 : 0,
             'is_flash'     => isset($post['is_flash']) ? 1 : 0,
-            'primary_image' => $existing['primary_image'] ?? null,
         ];
 
         $errors = [];
@@ -260,17 +296,33 @@ final class AdminController
             $errors['category_id'] = 'Catégorie inconnue.';
         }
 
-        [$imagePath, $imageError] = $this->handleUpload();
-
-        if ($imageError !== null) {
-            $errors['image'] = $imageError;
-        }
+        // Existing gallery, pictures marked for removal and the chosen main
+        // picture. New files are only stored once every field is valid.
+        $gallery      = $id !== null ? Product::adminImages($id) : [];
+        $galleryIds   = array_map(static fn (array $image): int => (int) $image['id'], $gallery);
+        $removeIds    = array_values(array_intersect(
+            array_map('intval', (array) ($post['remove_images'] ?? [])),
+            $galleryIds
+        ));
+        $remaining    = max(0, count($gallery) - count($removeIds));
+        $primaryImage = (int) ($post['primary_image'] ?? 0);
 
         if ($errors !== []) {
             http_response_code(422);
 
             $values['sizes']  = (string) $values['sizes'];
             $values['colors'] = (string) $values['colors'];
+
+            $this->renderForm($values, $errors, $id !== null ? 'edit' : 'create');
+
+            return;
+        }
+
+        [$newImages, $imageError] = $this->handleUploads($remaining);
+
+        if ($imageError !== null) {
+            $errors['images'] = $imageError;
+            http_response_code(422);
 
             $this->renderForm($values, $errors, $id !== null ? 'edit' : 'create');
 
@@ -303,9 +355,19 @@ final class AdminController
             Product::update($id, $data);
         }
 
-        if ($imagePath !== null) {
-            Product::setPrimaryImage($id, $imagePath);
+        foreach ($removeIds as $imageId) {
+            Product::deleteImage($id, $imageId);
         }
+
+        foreach ($newImages as $path) {
+            Product::addImage($id, $path);
+        }
+
+        if ($primaryImage > 0 && !in_array($primaryImage, $removeIds, true)) {
+            Product::setPrimaryImageId($id, $primaryImage);
+        }
+
+        Product::ensurePrimaryImage($id);
 
         flash('success', $existing !== null ? 'Produit mis à jour.' : 'Produit créé.');
         redirect($this->path('produits'));
@@ -326,6 +388,7 @@ final class AdminController
             'errors'      => $errors,
             'mode'        => $mode,
             'categories'  => Category::adminAll(),
+            'images'      => (int) ($product['id'] ?? 0) > 0 ? Product::adminImages((int) $product['id']) : [],
         ], 'layouts/admin');
     }
 
@@ -348,7 +411,6 @@ final class AdminController
             'is_active'     => 1,
             'is_featured'   => 0,
             'is_flash'      => 0,
-            'primary_image' => null,
         ];
     }
 
@@ -412,25 +474,41 @@ final class AdminController
     }
 
     /**
-     * @return array{0: string|null, 1: string|null}
+     * Store every uploaded gallery picture.
+     *
+     * @param int $remaining Pictures already kept for this product.
+     * @return array{0: array<int, string>, 1: string|null}
      */
-    private function handleUpload(): array
+    private function handleUploads(int $remaining): array
     {
-        if (!isset($_FILES['image']) || ($_FILES['image']['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
-            return [null, null];
+        if (!isset($_FILES['images']) || !is_array($_FILES['images']['name'] ?? null)) {
+            return [[], null];
         }
 
-        $file = $_FILES['image'];
+        $files      = $_FILES['images'];
+        $names      = (array) ($files['name'] ?? []);
+        $errors     = (array) ($files['error'] ?? []);
+        $sizes      = (array) ($files['size'] ?? []);
+        $temporaries = (array) ($files['tmp_name'] ?? []);
+        $incoming   = 0;
 
-        if (($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
-            return [null, 'Le téléversement a échoué, réessayez.'];
+        foreach ($names as $index => $name) {
+            if ((string) $name !== '' && ($errors[$index] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
+                $incoming++;
+            }
         }
 
-        if ((int) ($file['size'] ?? 0) > 3 * 1024 * 1024) {
-            return [null, 'Image trop lourde (3 Mo maximum).'];
+        if ($incoming === 0) {
+            return [[], null];
         }
 
-        $info = @getimagesize((string) $file['tmp_name']);
+        $slots = max(0, 8 - $remaining);
+
+        if ($incoming > $slots) {
+            return [[], $slots === 0
+                ? 'Ce produit a déjà 8 photos. Supprimez-en une avant d’en ajouter une autre.'
+                : 'Vous pouvez ajouter ' . $slots . ' photo(s) de plus (8 maximum par produit).'];
+        }
 
         $extensions = [
             IMAGETYPE_JPEG => 'jpg',
@@ -438,23 +516,71 @@ final class AdminController
             IMAGETYPE_WEBP => 'webp',
         ];
 
-        if ($info === false || !isset($extensions[$info[2]])) {
-            return [null, 'Format accepté : JPG, PNG ou WebP.'];
-        }
-
         $directory = PUBLIC_PATH . '/uploads/products';
 
         if (!is_dir($directory) && !@mkdir($directory, 0775, true)) {
-            return [null, 'Dossier d’images inaccessible.'];
+            return [[], 'Dossier d’images inaccessible.'];
         }
 
-        $filename = 'p' . bin2hex(random_bytes(8)) . '.' . $extensions[$info[2]];
+        $stored = [];
 
-        if (!@move_uploaded_file((string) $file['tmp_name'], $directory . '/' . $filename)) {
-            return [null, 'Enregistrement de l’image impossible.'];
+        foreach ($names as $index => $name) {
+            $error = (int) ($errors[$index] ?? UPLOAD_ERR_NO_FILE);
+
+            if ($error === UPLOAD_ERR_NO_FILE || (string) $name === '') {
+                continue;
+            }
+
+            if ($error !== UPLOAD_ERR_OK) {
+                $this->deleteUploadedFiles($stored);
+
+                return [[], 'Le téléversement a échoué, réessayez.'];
+            }
+
+            if ((int) ($sizes[$index] ?? 0) > 3 * 1024 * 1024) {
+                $this->deleteUploadedFiles($stored);
+
+                return [[], 'Chaque photo doit faire 3 Mo maximum.'];
+            }
+
+            $info = @getimagesize((string) ($temporaries[$index] ?? ''));
+
+            if ($info === false || !isset($extensions[$info[2]])) {
+                $this->deleteUploadedFiles($stored);
+
+                return [[], 'Format accepté : JPG, PNG ou WebP.'];
+            }
+
+            $filename = 'p' . bin2hex(random_bytes(8)) . '.' . $extensions[$info[2]];
+
+            if (!@move_uploaded_file((string) ($temporaries[$index] ?? ''), $directory . '/' . $filename)) {
+                $this->deleteUploadedFiles($stored);
+
+                return [[], 'Enregistrement de l’image impossible.'];
+            }
+
+            $stored[] = 'uploads/products/' . $filename;
         }
 
-        return ['uploads/products/' . $filename, null];
+        return [$stored, null];
+    }
+
+    /**
+     * @param array<int, string> $paths
+     */
+    private function deleteUploadedFiles(array $paths): void
+    {
+        foreach ($paths as $path) {
+            if (!str_starts_with($path, 'uploads/products/')) {
+                continue;
+            }
+
+            $file = PUBLIC_PATH . '/' . $path;
+
+            if (is_file($file)) {
+                @unlink($file);
+            }
+        }
     }
 
     /* ------------------------------------------------------------------
@@ -507,7 +633,7 @@ final class AdminController
         Category::create(
             $name,
             $slug,
-            (int) ($_POST['sort_order'] ?? 0),
+            max(1, (int) ($_POST['sort_order'] ?? 1)),
             $icon,
             isset($_POST['is_active'])
         );
@@ -548,7 +674,7 @@ final class AdminController
             'name'       => mb_substr(trim((string) ($_POST['name'] ?? '')), 0, 100),
             'slug'       => trim((string) ($_POST['slug'] ?? '')),
             'icon'       => (string) ($_POST['icon'] ?? ''),
-            'sort_order' => (string) (int) ($_POST['sort_order'] ?? 0),
+            'sort_order' => (string) max(1, (int) ($_POST['sort_order'] ?? 1)),
             'is_active'  => isset($_POST['is_active']) ? '1' : '0',
         ];
 
@@ -617,206 +743,61 @@ final class AdminController
     }
 
     /* ------------------------------------------------------------------
-       Settings
+       Social accounts (footer)
        ------------------------------------------------------------------ */
 
-    public function settings(): void
+    public function socialLinks(): void
     {
         $this->requireAdmin();
 
-        $this->renderSettings($this->settingsValues(), []);
-    }
-
-    public function saveSettings(): void
-    {
-        $this->requireAdmin();
-        $this->requireCsrf($this->path('reglages'));
-
-        $values = [
-            'store_name'        => mb_substr(trim((string) ($_POST['store_name'] ?? '')), 0, 60),
-            'whatsapp_number'   => preg_replace('/[^0-9]/', '', (string) ($_POST['whatsapp_number'] ?? '')) ?? '',
-            'delivery_fee'      => trim((string) ($_POST['delivery_fee'] ?? '0')),
-            'announcement_text' => mb_substr(trim((string) ($_POST['announcement_text'] ?? '')), 0, 140),
-            'flash_sale_end'    => trim((string) ($_POST['flash_sale_end'] ?? '')),
-            'instagram_url'     => trim((string) ($_POST['instagram_url'] ?? '')),
-            'footer_description' => mb_substr(trim((string) ($_POST['footer_description'] ?? '')), 0, 300),
-            'logo'              => (string) setting('site_logo', ''),
-        ];
-
-        $errors = [];
-
-        if (mb_strlen($values['store_name']) < 2) {
-            $errors['store_name'] = 'Nom de boutique trop court.';
-        }
-
-        if (strlen($values['whatsapp_number']) < 8 || strlen($values['whatsapp_number']) > 15) {
-            $errors['whatsapp_number'] = 'Numéro WhatsApp invalide (indicatif inclus, sans +).';
-        }
-
-        if (!is_numeric($values['delivery_fee']) || (float) $values['delivery_fee'] < 0) {
-            $errors['delivery_fee'] = 'Frais de livraison invalides.';
-        }
-
-        if ($values['flash_sale_end'] !== '' && strtotime($values['flash_sale_end']) === false) {
-            $errors['flash_sale_end'] = 'Date de fin invalide.';
-        }
-
-        if ($values['instagram_url'] !== '' && (
-            filter_var($values['instagram_url'], FILTER_VALIDATE_URL) === false
-            || preg_match('#^https?://#i', $values['instagram_url']) !== 1
-        )) {
-            $errors['instagram_url'] = 'Adresse Instagram invalide (elle doit commencer par https://).';
-        }
-
-        [$logoPath, $logoError] = $this->handleBrandUpload();
-
-        if ($logoError !== null) {
-            $errors['logo'] = $logoError;
-        }
-
-        if ($logoPath !== null) {
-            $this->deleteBrandFile((string) setting('site_logo', ''));
-            $values['logo'] = $logoPath;
-        } elseif (isset($_POST['remove_logo'])) {
-            $this->deleteBrandFile($values['logo']);
-            $values['logo'] = '';
-        }
-
-        if ($errors !== []) {
-            // Do not keep an uploaded file that was not saved with the form.
-            if ($logoPath !== null) {
-                $this->deleteBrandFile($logoPath);
-            }
-
-            $values['logo'] = (string) setting('site_logo', '');
-
-            http_response_code(422);
-            $this->renderSettings($values, $errors);
-
-            return;
-        }
-
-        Setting::put('store_name', $values['store_name']);
-        Setting::put('whatsapp_number', $values['whatsapp_number']);
-        Setting::put('delivery_fee', number_format((float) $values['delivery_fee'], 2, '.', ''));
-        Setting::put('announcement_text', $values['announcement_text']);
-        Setting::put('instagram_url', $values['instagram_url']);
-        Setting::put('site_logo', $values['logo']);
-        Setting::put(
-            'flash_sale_end',
-            $values['flash_sale_end'] !== '' ? date('Y-m-d H:i:s', (int) strtotime($values['flash_sale_end'])) : ''
-        );
-
-        SiteContent::applyFlat([
-            'announcement.messages' => implode("\n", array_slice(
-                SiteContent::section('announcement')['messages'] ?? [],
-                1
-            )),
-            'footer.description'    => $values['footer_description'],
-        ]);
-
-        // The form's announcement field replaces the first message only, so
-        // the other rotating messages are preserved.
-        SiteContent::setFirstAnnouncement($values['announcement_text']);
-
-        flash('success', 'Réglages enregistrés. Le site est mis à jour immédiatement.');
-        redirect($this->path('reglages'));
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    private function settingsValues(): array
-    {
-        return [
-            'store_name'        => (string) (Setting::get('store_name') ?? config('app_name')),
-            'whatsapp_number'   => (string) (Setting::get('whatsapp_number') ?? config('whatsapp_number')),
-            'delivery_fee'      => (string) (Setting::get('delivery_fee') ?? Setting::get('delivery_fee_economy') ?? '25'),
-            'announcement_text' => SiteContent::firstAnnouncement(),
-            'flash_sale_end'    => (string) (Setting::get('flash_sale_end') ?? ''),
-            'instagram_url'     => (string) (Setting::raw('instagram_url', config('instagram_url') ?? '')),
-            'footer_description' => (string) (SiteContent::section('footer')['description'] ?? ''),
-            'logo'              => (string) (Setting::get('site_logo') ?? ''),
-        ];
-    }
-
-    /**
-     * @param array<string, string> $values
-     * @param array<string, string> $errors
-     */
-    private function renderSettings(array $values, array $errors): void
-    {
-        View::render('admin/settings', [
-            'title'       => 'Réglages — Gestion ' . config('app_name'),
-            'adminActive' => 'settings',
-            'adminTitle'  => 'Réglages',
+        View::render('admin/social', [
+            'title'       => 'Réseaux sociaux — Gestion ' . config('app_name'),
+            'adminActive' => 'social',
+            'adminTitle'  => 'Réseaux sociaux',
             'noindex'     => true,
-            'values'      => $values,
-            'errors'      => $errors,
+            'links'       => SocialLink::all(),
+            'platforms'   => SocialLink::platforms(),
+            'maxLinks'    => SocialLink::maxLinks(),
         ], 'layouts/admin');
     }
 
-    /* ------------------------------------------------------------------
-       Brand logo upload
-       ------------------------------------------------------------------ */
-
-    /**
-     * @return array{0: string|null, 1: string|null}
-     */
-    private function handleBrandUpload(): array
+    public function addSocialLink(): void
     {
-        if (!isset($_FILES['logo']) || ($_FILES['logo']['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
-            return [null, null];
+        $this->requireAdmin();
+        $this->requireCsrf($this->path('reseaux'));
+
+        $platform = (string) ($_POST['platform'] ?? '');
+        $url      = trim((string) ($_POST['url'] ?? ''));
+        $label    = mb_substr(trim((string) ($_POST['label'] ?? '')), 0, 40);
+
+        if (count(SocialLink::all()) >= SocialLink::maxLinks()) {
+            flash('error', 'Vous pouvez afficher ' . SocialLink::maxLinks() . ' réseaux au maximum. Supprimez-en un d’abord.');
+            redirect($this->path('reseaux'));
         }
 
-        $file = $_FILES['logo'];
-
-        if (($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
-            return [null, 'Le téléversement du logo a échoué, réessayez.'];
+        if (filter_var($url, FILTER_VALIDATE_URL) === false || preg_match('#^https?://#i', $url) !== 1) {
+            flash('error', 'Adresse invalide : elle doit commencer par https:// (ou http://).');
+            redirect($this->path('reseaux'));
         }
 
-        if ((int) ($file['size'] ?? 0) > 2 * 1024 * 1024) {
-            return [null, 'Logo trop lourd (2 Mo maximum).'];
+        if (!SocialLink::add($platform, $url, $label)) {
+            flash('error', 'Impossible d’ajouter ce réseau. Vérifiez le réseau et l’adresse.');
+            redirect($this->path('reseaux'));
         }
 
-        $info = @getimagesize((string) $file['tmp_name']);
-
-        $extensions = [
-            IMAGETYPE_JPEG => 'jpg',
-            IMAGETYPE_PNG  => 'png',
-            IMAGETYPE_WEBP => 'webp',
-        ];
-
-        if ($info === false || !isset($extensions[$info[2]])) {
-            return [null, 'Format accepté : JPG, PNG ou WebP.'];
-        }
-
-        $directory = PUBLIC_PATH . '/uploads/brand';
-
-        if (!is_dir($directory) && !@mkdir($directory, 0775, true)) {
-            return [null, 'Dossier d’images inaccessible.'];
-        }
-
-        $filename = 'logo-' . bin2hex(random_bytes(8)) . '.' . $extensions[$info[2]];
-
-        if (!@move_uploaded_file((string) $file['tmp_name'], $directory . '/' . $filename)) {
-            return [null, 'Enregistrement du logo impossible.'];
-        }
-
-        return ['uploads/brand/' . $filename, null];
+        flash('success', 'Réseau ajouté au pied de page.');
+        redirect($this->path('reseaux'));
     }
 
-    private function deleteBrandFile(string $path): void
+    public function deleteSocialLink(string $id): void
     {
-        if (!str_starts_with($path, 'uploads/brand/')) {
-            return;
-        }
+        $this->requireAdmin();
+        $this->requireCsrf($this->path('reseaux'));
 
-        $file = PUBLIC_PATH . '/' . $path;
+        SocialLink::remove($id);
 
-        if (is_file($file)) {
-            @unlink($file);
-        }
+        flash('success', 'Réseau supprimé du pied de page.');
+        redirect($this->path('reseaux'));
     }
 
     /* ------------------------------------------------------------------

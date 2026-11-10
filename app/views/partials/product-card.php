@@ -36,6 +36,7 @@ $cardLabel    = $cardIsFlash ? 'Promo flash' : (!empty($product['is_featured']) 
                 src="<?= e($cardImage) ?>"
                 alt="<?= e($cardTitle) ?>"
                 loading="lazy"
+                decoding="async"
                 width="400"
                 height="533"
             >

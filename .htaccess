@@ -20,6 +20,10 @@
     RewriteRule ^config\.php$ - [F]
     RewriteRule ^\.ht - [F]
 
+    # Hide Git metadata, environment files and other dotfiles. Let
+    # .well-known through for HTTPS certificate validation.
+    RewriteRule (^|/)\.(?!well-known)[^/]+$ - [F]
+
     # Real files (css, js, images, uploads) and real folders are served as-is.
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d

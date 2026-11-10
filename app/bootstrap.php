@@ -61,6 +61,11 @@ require APP_PATH . '/models/Cart.php';
 require APP_PATH . '/models/Product.php';
 require APP_PATH . '/models/Category.php';
 require APP_PATH . '/models/SiteContent.php';
+require APP_PATH . '/models/SocialLink.php';
+
+// Start the session before any HTML is emitted. The CSRF token in the page
+// head, the cart and the wishlist all rely on the session cookie being sent.
+\App\Core\Session::start();
 
 $debug = (bool) config('app_debug', false);
 
@@ -156,6 +161,8 @@ if (!headers_sent()) {
     header('X-Content-Type-Options: nosniff');
     header('Referrer-Policy: strict-origin-when-cross-origin');
     header('X-Frame-Options: DENY');
+    header('X-Permitted-Cross-Domain-Policies: none');
+    header('Cross-Origin-Opener-Policy: same-origin');
     header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
     header(
         "Content-Security-Policy: default-src 'self'; "
@@ -176,6 +183,14 @@ if (!headers_sent()) {
 
     if ($https) {
         header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
+    }
+
+    // Never let a browser restore a cached admin page after logout.
+    $adminPath = '/' . trim((string) config('admin_path'), '/');
+    $adminPath = rtrim($adminPath, '/') ?: '/gestion';
+
+    if (Router::path() === $adminPath || str_starts_with(Router::path(), $adminPath . '/')) {
+        header('Cache-Control: no-store, private');
     }
 }
 

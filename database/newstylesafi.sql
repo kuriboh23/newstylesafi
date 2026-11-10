@@ -32,7 +32,7 @@ CREATE TABLE `categories` (
   `name` varchar(100) NOT NULL,
   `slug` varchar(120) NOT NULL,
   `icon` varchar(50) DEFAULT NULL COMMENT 'nom d''icône du sprite SVG',
-  `sort_order` int(11) NOT NULL DEFAULT 0,
+  `sort_order` int(11) NOT NULL DEFAULT 1,
   `is_active` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

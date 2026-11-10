@@ -24,9 +24,10 @@ $navItems = [
     ['key' => 'dashboard', 'label' => 'Tableau', 'icon' => 'grid', 'url' => admin_url()],
     ['key' => 'products', 'label' => 'Produits', 'icon' => 'box', 'url' => admin_url('produits')],
     ['key' => 'categories', 'label' => 'Catégories', 'icon' => 'tag', 'url' => admin_url('categories')],
+    ['key' => 'social', 'label' => 'Réseaux', 'icon' => 'instagram', 'url' => admin_url('reseaux')],
 ];
 
-// Admin area: catalogue and categories.
+// Admin area: catalogue, categories and footer social accounts.
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -35,7 +36,7 @@ $navItems = [
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title><?= e($pageTitle) ?></title>
     <meta name="robots" content="noindex, nofollow">
-    <meta name="theme-color" content="#FAF6EF">
+    <meta name="theme-color" content="#FFFFFF">
     <link rel="icon" href="<?= e(url('favicon.svg')) ?>" type="image/svg+xml">
     <link rel="stylesheet" href="<?= e(asset('css/app.css')) ?>">
     <script src="<?= e(asset('js/app.js')) ?>" defer></script>

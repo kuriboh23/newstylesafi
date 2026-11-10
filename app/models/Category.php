@@ -94,7 +94,7 @@ final class Category
         );
     }
 
-    public static function create(string $name, string $slug, int $sortOrder = 0, string $icon = '', bool $active = true): void
+    public static function create(string $name, string $slug, int $sortOrder = 1, string $icon = '', bool $active = true): void
     {
         Database::execute(
             'INSERT INTO categories (name, slug, icon, sort_order, is_active)
@@ -103,7 +103,7 @@ final class Category
                 'name'       => $name,
                 'slug'       => $slug,
                 'icon'       => $icon !== '' ? $icon : null,
-                'sort_order' => $sortOrder,
+                'sort_order' => max(1, $sortOrder),
                 'is_active'  => $active ? 1 : 0,
             ]
         );

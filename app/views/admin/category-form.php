@@ -56,7 +56,7 @@ $isActive = (string) ($category['is_active'] ?? '1') === '1';
 
             <label class="field">
                 <span class="field-label">Ordre d’affichage</span>
-                <input class="input" type="number" name="sort_order" value="<?= (int) ($category['sort_order'] ?? 0) ?>" step="1">
+                <input class="input" type="number" name="sort_order" value="<?= max(1, (int) ($category['sort_order'] ?? 1)) ?>" min="1" step="1">
                 <span class="field-hint">Les petits nombres apparaissent en premier.</span>
             </label>
         </div>

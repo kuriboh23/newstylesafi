@@ -5,11 +5,10 @@ declare(strict_types=1);
 /**
  * Search page.
  *
- * The input shows live title suggestions (JSON endpoint) and the recent
- * searches kept in localStorage. Submitting lands on the catalogue with
- * the query applied; a server-rendered result list stays below as a
- * no-JavaScript fallback. A misspelt query is corrected server-side to
- * the closest word found in the catalogue.
+ * The input shows live title suggestions (JSON endpoint). Submitting lands
+ * on the catalogue with the query applied; a server-rendered result list
+ * stays below as a no-JavaScript fallback. A misspelt query is corrected
+ * server-side to the closest word found in the catalogue.
  *
  * @var string                          $query
  * @var string|null                     $suggested
@@ -63,12 +62,6 @@ $shownQuery   = $suggested ?? $query;
         <div class="search-suggest" id="searchSuggestions" role="listbox" aria-label="Suggestions" hidden></div>
 
         <?php if ($query === ''): ?>
-            <div class="search-history" id="searchHistory" hidden>
-                <span class="search-history-label">Recherches récentes</span>
-                <div class="search-history-list" data-history-list></div>
-                <button type="button" class="search-history-clear" data-history-clear>Effacer</button>
-            </div>
-
             <div class="search-popular">
                 <h2 class="search-popular-title">Recherches populaires</h2>
                 <div class="search-chips">

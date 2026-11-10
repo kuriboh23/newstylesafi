@@ -17,7 +17,7 @@ CREATE TABLE `categories` (
   `name` VARCHAR(100) NOT NULL,
   `slug` VARCHAR(120) NOT NULL,
   `icon` VARCHAR(50) DEFAULT NULL COMMENT 'nom d''icône du sprite SVG',
-  `sort_order` INT NOT NULL DEFAULT 0,
+  `sort_order` INT NOT NULL DEFAULT 1,
   `is_active` TINYINT(1) NOT NULL DEFAULT 1,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),

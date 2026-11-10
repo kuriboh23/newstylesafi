@@ -9,10 +9,11 @@ declare(strict_types=1);
  * admin, so this template never needs to be touched by the owner.
  */
 
-$content   = \App\Models\SiteContent::section('footer');
+$content    = \App\Models\SiteContent::section('footer');
 $footerCats = nav_categories(5);
-$instagram = trim((string) \App\Models\Setting::raw('instagram_url', (string) config('instagram_url')));
-$logo      = site_logo_url();
+$socials    = \App\Models\SocialLink::all();
+$socialPlatforms = \App\Models\SocialLink::platforms();
+$logo       = site_logo_url();
 [$brandFirst, $brandSecond] = brand_parts();
 ?>
 <footer class="site-footer">
@@ -34,16 +35,27 @@ $logo      = site_logo_url();
                 <?= e((string) ($content['description'] ?? '')) ?>
             </p>
 
-            <?php if ($instagram !== ''): ?>
-                <a
-                    class="footer-social"
-                    href="<?= e($instagram) ?>"
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="Instagram <?= e(store_name()) ?>"
-                >
-                    <?= icon('instagram', 'icon') ?>
-                </a>
+            <?php if ($socials !== []): ?>
+                <div class="footer-socials" aria-label="Réseaux sociaux">
+                    <?php foreach ($socials as $social): ?>
+                        <?php
+                        $platform = (string) $social['platform'];
+                        $name     = $social['label'] !== ''
+                            ? $social['label']
+                            : ($socialPlatforms[$platform] ?? 'Réseau social');
+                        ?>
+                        <a
+                            class="footer-social"
+                            href="<?= e($social['url']) ?>"
+                            target="_blank"
+                            rel="noopener"
+                            aria-label="<?= e($name) ?>"
+                            title="<?= e($name) ?>"
+                        >
+                            <?= icon($platform, 'icon') ?>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
             <?php endif; ?>
         </div>
 

@@ -9,7 +9,7 @@ use App\Models\Product;
 /**
  * Front-end product helpers.
  *
- * Kept thin on purpose: catalogue pages and the home hero use ProductModel
+ * Kept thin on purpose: catalogue pages and the home hero use Product
  * (app/models/Product.php) directly, this file only bridges a couple of
  * global helpers used in templates.
  */
@@ -44,9 +44,4 @@ function product_by_slug(string $slug): ?array
 function flash_sale_products(): array
 {
     return Product::flashSales();
-}
-
-function flash_sale_alert_message(): ?string
-{
-    return Product::flashAlertMessage();
 }

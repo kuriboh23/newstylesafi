@@ -71,7 +71,9 @@ return [
     // site goes live.
     'whatsapp_number' => '212600000000',
 
-    // Instagram link in the footer (empty string hides it).
+    // First Instagram account shown in the footer. The admin page
+    // “Réseaux sociaux” can add up to 8 accounts; this one is used until
+    // the list is saved there (empty string starts with no social icon).
     'instagram_url' => 'https://www.instagram.com/newstylesafi/',
 
 
@@ -123,7 +125,7 @@ return [
     'announcement' => [
         'highlight' => 'Nouvelle collection homme',
         'text'      => 'Commande simple sur WhatsApp',
-        'location'  => 'Safi, Maroc',
+        'location'  => 'Maroc',
         'messages'  => [
             'Nouvelle collection homme disponible',
             'T-shirts, chemises, pantalons et vestes',
@@ -143,7 +145,7 @@ return [
             'text'    => 'Des pièces masculines choisies pour un vestiaire net et actuel.',
             'cta'     => 'Découvrir',
             'link'    => '/produits',
-            'theme'   => 'dark',
+            'theme'   => 'light',
         ],
         [
             'eyebrow' => 'Les essentiels',

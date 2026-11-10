@@ -1,0 +1,13 @@
+# Uploaded files are images only. If a malicious file ever reaches this
+# folder, Apache must serve it as data, never execute it.
+<FilesMatch "\.(php|phtml|phar|php3|php4|php5|php7|php8|pl|py|cgi|sh|asp|aspx)$">
+    SetHandler none
+    ForceType application/octet-stream
+    RemoveHandler .php .phtml .phar .pl .py .cgi .sh .asp .aspx
+    RemoveType .php .phtml .phar .pl .py .cgi .sh .asp .aspx
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set Content-Disposition "inline"
+</IfModule>

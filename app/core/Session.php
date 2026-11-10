@@ -17,10 +17,14 @@ final class Session
             $cookieSecure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
                 || ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https';
 
+            $basePath = function_exists('base_path') ? base_path() : '';
+
             $options = [
-                'cookie_httponly' => true,
-                'cookie_secure'   => $cookieSecure,
-                'cookie_samesite' => 'Lax',
+                'cookie_httponly'  => true,
+                'cookie_secure'    => $cookieSecure,
+                'cookie_samesite'  => 'Lax',
+                'cookie_path'      => $basePath !== '' ? $basePath : '/',
+                'use_only_cookies' => true,
             ];
 
             try {
