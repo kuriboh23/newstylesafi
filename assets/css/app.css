@@ -1,27 +1,20 @@
 /* ==================================================================
-   Newstylesafi — app.css
+   Shoop Moda Style — app.css
    Mobile-first, no framework, no external font.
-   Palette: #FFD400 / #080808 / #BDBDBD / #292929 / #0F0F0F
+   Palette: #704F38 / #1F2029 / #797979 / #EDEDED / #FFFFFF
    ================================================================== */
 
 /* ---------- 1. Design tokens ------------------------------------- */
 :root {
-    /* Newstylesafi — noir & jaune */
-    --primary: #FFD400;
-    --primary-dark: #E6BF00;
-    --primary-soft: rgba(255, 212, 0, 0.12);
-    --dark: #080808;          /* encre historique = noir profond */
-    --ink: #F5F5F5;           /* texte courant sur fond noir */
-    --surface: #0F0F0F;       /* cartes et panneaux */
-    --surface-2: #141414;     /* surface surélevée */
-    --gray: #292929;          /* bordures, icônes discrètes */
-    --gray-text: #BDBDBD;     /* texte secondaire */
-    --line: #292929;          /* séparateurs */
-    --light: #141414;
+    --primary: #704F38;
+    --primary-soft: rgba(112, 79, 56, 0.08);
+    --dark: #1F2029;
+    --gray: #797979;          /* couleur de marque (bordures, icônes) */
+    --gray-text: #5C5C5C;     /* texte courant : contraste AA sur blanc et sur #EDEDED */
+    --light: #EDEDED;
     --white: #FFFFFF;
-    --sale: #FFD400;
     --whatsapp: #25D366;
-    --star: #FFD400;
+    --star: #FFB800;
 
     --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
@@ -2752,22 +2745,19 @@ body.drawer-open {
    Palette: #A9552F / #1B1A18 / #57524D / #F5F1EB / #FFFFFF
    ================================================================== */
 :root {
-    --primary: #FFD400;
-    --primary-dark: #E6BF00;
-    --primary-soft: rgba(255, 212, 0, 0.12);
-    --dark: #080808;
-    --ink: #F5F5F5;
-    --surface: #0F0F0F;
-    --surface-2: #141414;
-    --gray: #6E6E6E;
-    --gray-text: #BDBDBD;
-    --light: #141414;
-    --line: #292929;
-    --sale: #FFD400;
-    --ok: #7CCB8A;
+    --primary: #A9552F;
+    --primary-dark: #8B4526;
+    --primary-soft: rgba(169, 85, 47, 0.10);
+    --dark: #1B1A18;
+    --gray: #8C857E;
+    --gray-text: #57524D;
+    --light: #F5F1EB;
+    --line: #E7DFD5;
+    --sale: #C43D2B;
+    --ok: #1F7A46;
     --white: #FFFFFF;
     --whatsapp: #25D366;
-    --star: #FFD400;
+    --star: #F4B740;
 }
 
 /* Header ---------------------------------------------------------- */
@@ -5629,5 +5619,14 @@ body.drawer-open {
     .count-unit {
         min-width: 32px;
         padding: 3px 5px;
+    }
+
+    .count-value {
+        font-size: 12.5px;
+    }
+
+    .count-label {
+        font-size: 7px;
+        letter-spacing: 0.3px;
     }
 }
