@@ -1,7 +1,12 @@
 -- =============================================================
--- Shoop Moda Style — données de démonstration (optionnel)
+-- Newstylesafi — données de démonstration (optionnel)
 -- À importer APRÈS schema.sql.
 -- Supprimer ce fichier du serveur après la mise en production.
+--
+-- Les produits ci-dessous sont des EXEMPLES : noms, prix, tailles et
+-- couleurs sont là pour montrer la boutique. Remplacez-les par les
+-- vraies pièces et photos fournies par le propriétaire avant la mise
+-- en ligne.
 -- =============================================================
 
 SET NAMES utf8mb4;
@@ -17,132 +22,134 @@ ALTER TABLE `product_images` AUTO_INCREMENT = 1;
 ALTER TABLE `promo_codes` AUTO_INCREMENT = 1;
 
 -- ----------------------------
--- Catégories
+-- Catégories (homme)
 -- ----------------------------
 INSERT INTO `categories` (`id`, `name`, `slug`, `icon`, `sort_order`, `is_active`) VALUES
-  (1, 'Femme', 'femme', 'dress', 1, 1),
-  (2, 'Enfants', 'enfants', 'tshirt', 2, 1),
-  (3, 'Pyjamas & Ensembles', 'pyjamas', 'moon', 3, 1),
-  (4, 'Robes', 'robes', 'jacket', 4, 1);
+  (1, 'T-shirts', 'tshirts', 'tshirt', 1, 1),
+  (2, 'Chemises', 'chemises', 'shirt', 2, 1),
+  (3, 'Pantalons', 'pantalons', 'pants', 3, 1),
+  (4, 'Vestes & Manteaux', 'vestes', 'jacket', 4, 1),
+  (5, 'Ensembles', 'ensembles', 'shirt', 5, 1),
+  (6, 'Accessoires', 'accessoires', 'tag', 6, 1);
 
 -- ----------------------------
--- Produits
+-- Produits (exemples)
 -- ----------------------------
 INSERT INTO `products`
 (`id`, `category_id`, `title`, `slug`, `description`, `price`, `sale_price`, `rating`, `stock`,
  `sizes`, `colors`, `is_flash`, `is_featured`, `is_active`) VALUES
-(1, 3, 'Ensemble pyjama satin « Istanbul »', 'ensemble-pyjama-satin-istanbul',
- 'Ensemble deux pièces en satin fluide, finitions soignées et ceinture élastiquée. Confort léger pour les soirées et les matins tranquilles.',
- 299.00, 249.00, 4.9, 14,
+(1, 1, 'T-shirt coton « Essentiel »', 't-shirt-coton-essentiel',
+ 'T-shirt en coton, col rond et coupe droite. Une base simple à porter tous les jours.',
+ 99.00, NULL, 5.0, 30,
  '["S","M","L","XL","XXL"]',
- '[{"name":"Marron","hex":"#704F38"},{"name":"Beige","hex":"#C2A691"},{"name":"Noir","hex":"#1F2029"}]',
- 1, 1, 1),
-
-(2, 3, 'Pyjama coton « Bosphore »', 'pyjama-coton-bosphore',
- 'Pyjama en coton doux, coupe ample et respirante. Idéal pour dormir confortablement en toute saison.',
- 229.00, NULL, 4.8, 20,
- '["S","M","L","XL"]',
- '[{"name":"Crème","hex":"#EFE7DE"},{"name":"Marron","hex":"#704F38"}]',
- 1, 0, 1),
-
-(3, 4, 'Robe longue « Sultan »', 'robe-longue-sultan',
- 'Robe longue à la coupe fluide, manches longues et ceinture assortie. Une pièce élégante pour les occasions spéciales.',
- 349.00, NULL, 5.0, 8,
- '["S","M","L","XL"]',
- '[{"name":"Noir","hex":"#1F2029"},{"name":"Beige","hex":"#C2A691"}]',
+ '[{"name":"Noir","hex":"#080808"},{"name":"Blanc","hex":"#FFFFFF"},{"name":"Gris","hex":"#6E6E6E"}]',
  0, 1, 1),
 
-(4, 4, 'Robe plissée « Élégance »', 'robe-plissee-elegance',
- 'Robe midi plissée au tombé léger. Se porte facilement au quotidien comme en soirée.',
- 299.00, 249.00, 4.7, 10,
- '["S","M","L","XL","XXL"]',
- '[{"name":"Marron","hex":"#704F38"},{"name":"Crème","hex":"#EFE7DE"}]',
+(2, 1, 'T-shirt oversize « Atlas »', 't-shirt-oversize-atlas',
+ 'T-shirt à coupe ample, épaules tombantes et finitions renforcées. Se porte seul ou sous une veste.',
+ 129.00, 99.00, 5.0, 18,
+ '["S","M","L","XL"]',
+ '[{"name":"Noir","hex":"#080808"},{"name":"Jaune","hex":"#FFD400"}]',
  1, 0, 1),
 
-(5, 1, 'Chemise en soie « Perle »', 'chemise-soie-perle',
- 'Chemise en soie au toucher satiné, col classique et boutons nacrés. Parfaite avec un pantalon taille haute.',
- 259.00, NULL, 4.8, 12,
+(3, 2, 'Chemise oxford « Classic »', 'chemise-oxford-classic',
+ 'Chemise en oxford, col boutonné et coupe ajustée. À porter au bureau comme en sortie.',
+ 229.00, 189.00, 5.0, 12,
  '["S","M","L","XL"]',
- '[{"name":"Crème","hex":"#EFE7DE"},{"name":"Beige","hex":"#C2A691"}]',
+ '[{"name":"Blanc","hex":"#FFFFFF"},{"name":"Bleu","hex":"#1E2A44"}]',
  0, 1, 1),
 
-(6, 1, 'Pantalon taille haute « Moda »', 'pantalon-taille-haute-moda',
- 'Pantalon taille haute à jambe droite, matière stretch confortable. Une base indispensable du dressing.',
- 179.00, NULL, 4.6, 25,
- '["S","M","L","XL","XXL"]',
- '[{"name":"Noir","hex":"#1F2029"},{"name":"Marron","hex":"#704F38"}]',
- 0, 0, 1),
-
-(7, 1, 'Trench « Automne »', 'trench-automne',
- 'Trench mi-long à ceinture, doublure légère et poches passepoilées. La pièce de mi-saison.',
- 429.00, 379.00, 4.9, 6,
+(4, 2, 'Chemise en lin « Safi »', 'chemise-lin-safi',
+ 'Chemise en lin léger, col ouvert et manches longues retroussables. Confortable par temps chaud.',
+ 249.00, NULL, 5.0, 10,
  '["S","M","L","XL"]',
- '[{"name":"Beige","hex":"#C2A691"},{"name":"Noir","hex":"#1F2029"}]',
+ '[{"name":"Beige","hex":"#D8C7A8"},{"name":"Blanc","hex":"#FFFFFF"}]',
  0, 1, 1),
 
-(8, 1, 'T-shirt coton « Douceur »', 't-shirt-coton-douceur',
- 'T-shirt en coton peigné, col rond et coupe droite. Doux, simple, à porter tous les jours.',
- 99.00, NULL, 4.5, 40,
- '["S","M","L","XL","XXL"]',
- '[{"name":"Blanc","hex":"#FFFFFF"},{"name":"Marron","hex":"#704F38"}]',
+(5, 3, 'Pantalon chino « Medina »', 'pantalon-chino-medina',
+ 'Chino à jambe droite, taille normale et poches latérales. Une coupe propre au quotidien.',
+ 249.00, 199.00, 5.0, 15,
+ '["28","30","32","34","36"]',
+ '[{"name":"Noir","hex":"#080808"},{"name":"Beige","hex":"#D8C7A8"},{"name":"Kaki","hex":"#4B5138"}]',
+ 0, 1, 1),
+
+(6, 3, 'Pantalon cargo « Nomade »', 'pantalon-cargo-nomade',
+ 'Pantalon cargo avec poches utilitaires et chevilles resserrées. Solide et pratique.',
+ 299.00, NULL, 5.0, 8,
+ '["28","30","32","34","36"]',
+ '[{"name":"Noir","hex":"#080808"},{"name":"Kaki","hex":"#4B5138"}]',
  0, 0, 1),
 
-(9, 2, 'Ensemble enfant « Petit Prince »', 'ensemble-enfant-petit-prince',
- 'Ensemble deux pièces pour enfant, coton doux et ceinture élastiquée. Confort toute la journée.',
- 149.00, NULL, 4.8, 18,
- '["2-3 ans","4-5 ans","6-7 ans","8-9 ans"]',
- '[{"name":"Bleu nuit","hex":"#1F2029"},{"name":"Beige","hex":"#C2A691"}]',
- 0, 0, 1),
+(7, 4, 'Veste en jean « Indigo »', 'veste-jean-indigo',
+ 'Veste en jean, fermeture boutonnée et poches poitrine. La pièce de mi-saison.',
+ 399.00, NULL, 5.0, 6,
+ '["S","M","L","XL"]',
+ '[{"name":"Bleu","hex":"#1E2A44"},{"name":"Noir","hex":"#080808"}]',
+ 0, 1, 1),
 
-(10, 2, 'Pyjama enfant « Étoile »', 'pyjama-enfant-etoile',
- 'Pyjama enfant en coton respirant, motifs discrets et poignets doux. Pensé pour bien dormir.',
- 129.00, 109.00, 4.9, 22,
- '["2-3 ans","4-5 ans","6-7 ans","8-9 ans"]',
- '[{"name":"Crème","hex":"#EFE7DE"},{"name":"Marron","hex":"#704F38"}]',
+(8, 4, 'Blouson « Nuit »', 'blouson-nuit',
+ 'Blouson léger à col montant, doublure simple et zip central. Facile à associer.',
+ 449.00, 379.00, 5.0, 4,
+ '["S","M","L","XL"]',
+ '[{"name":"Noir","hex":"#080808"}]',
  1, 0, 1),
 
-(11, 2, 'Robe enfant « Fleur »', 'robe-enfant-fleur',
- 'Robe enfant légère à manches courtes, doublure coton. Jolie pour les fêtes de famille.',
- 169.00, NULL, 4.7, 15,
- '["2-3 ans","4-5 ans","6-7 ans"]',
- '[{"name":"Beige","hex":"#C2A691"},{"name":"Crème","hex":"#EFE7DE"}]',
+(9, 5, 'Ensemble chemise + pantalon « Signature »', 'ensemble-chemise-pantalon-signature',
+ 'Ensemble deux pièces : chemise et pantalon assortis, même matière et même teinte.',
+ 499.00, NULL, 5.0, 5,
+ '["S","M","L","XL"]',
+ '[{"name":"Noir","hex":"#080808"},{"name":"Beige","hex":"#D8C7A8"}]',
+ 0, 1, 1),
+
+(10, 5, 'Ensemble polo + short « Été »', 'ensemble-polo-short-ete',
+ 'Ensemble polo et short en coton léger. Pensé pour les journées chaudes.',
+ 299.00, 249.00, 5.0, 9,
+ '["S","M","L","XL"]',
+ '[{"name":"Blanc","hex":"#FFFFFF"},{"name":"Jaune","hex":"#FFD400"}]',
  0, 0, 1),
 
-(12, 3, 'Ensemble famille « Cocooning »', 'ensemble-famille-cocooning',
- 'Ensemble coordonné pour elle et les enfants, matière douce et chaude. Parfait pour les moments à la maison.',
- 399.00, 349.00, 5.0, 9,
- '["S","M","L","XL","XXL"]',
- '[{"name":"Beige","hex":"#C2A691"},{"name":"Marron","hex":"#704F38"},{"name":"Crème","hex":"#EFE7DE"}]',
- 1, 1, 1);
+(11, 6, 'Casquette « Newstylesafi »', 'casquette-newstylesafi',
+ 'Casquette à visière courbée, taille réglable à l’arrière.',
+ 89.00, NULL, 5.0, 25,
+ '["Taille unique"]',
+ '[{"name":"Noir","hex":"#080808"},{"name":"Jaune","hex":"#FFD400"}]',
+ 0, 0, 1),
+
+(12, 6, 'Ceinture cuir « Safi »', 'ceinture-cuir-safi',
+ 'Ceinture en cuir à boucle métal, ajustable.',
+ 129.00, NULL, 5.0, 14,
+ '["Taille unique"]',
+ '[{"name":"Noir","hex":"#080808"},{"name":"Marron","hex":"#6B4A2F"}]',
+ 0, 0, 1);
 
 -- ----------------------------
 -- Images (placeholders générés, remplacés via l'admin)
 -- ----------------------------
 INSERT INTO `product_images` (`product_id`, `image_path`, `sort_order`, `is_primary`) VALUES
-  (1, 'assets/images/placeholders/ensemble-pyjama-satin-istanbul.svg', 1, 1),
-  (1, 'assets/images/placeholders/ensemble-pyjama-satin-istanbul-2.svg', 2, 0),
-  (2, 'assets/images/placeholders/pyjama-coton-bosphore.svg', 1, 1),
-  (2, 'assets/images/placeholders/pyjama-coton-bosphore-2.svg', 2, 0),
-  (3, 'assets/images/placeholders/robe-longue-sultan.svg', 1, 1),
-  (3, 'assets/images/placeholders/robe-longue-sultan-2.svg', 2, 0),
-  (4, 'assets/images/placeholders/robe-plissee-elegance.svg', 1, 1),
-  (4, 'assets/images/placeholders/robe-plissee-elegance-2.svg', 2, 0),
-  (5, 'assets/images/placeholders/chemise-soie-perle.svg', 1, 1),
-  (5, 'assets/images/placeholders/chemise-soie-perle-2.svg', 2, 0),
-  (6, 'assets/images/placeholders/pantalon-taille-haute-moda.svg', 1, 1),
-  (6, 'assets/images/placeholders/pantalon-taille-haute-moda-2.svg', 2, 0),
-  (7, 'assets/images/placeholders/trench-automne.svg', 1, 1),
-  (7, 'assets/images/placeholders/trench-automne-2.svg', 2, 0),
-  (8, 'assets/images/placeholders/t-shirt-coton-douceur.svg', 1, 1),
-  (8, 'assets/images/placeholders/t-shirt-coton-douceur-2.svg', 2, 0),
-  (9, 'assets/images/placeholders/ensemble-enfant-petit-prince.svg', 1, 1),
-  (9, 'assets/images/placeholders/ensemble-enfant-petit-prince-2.svg', 2, 0),
-  (10, 'assets/images/placeholders/pyjama-enfant-etoile.svg', 1, 1),
-  (10, 'assets/images/placeholders/pyjama-enfant-etoile-2.svg', 2, 0),
-  (11, 'assets/images/placeholders/robe-enfant-fleur.svg', 1, 1),
-  (11, 'assets/images/placeholders/robe-enfant-fleur-2.svg', 2, 0),
-  (12, 'assets/images/placeholders/ensemble-famille-cocooning.svg', 1, 1),
-  (12, 'assets/images/placeholders/ensemble-famille-cocooning-2.svg', 2, 0);
+  (1, 'assets/images/placeholders/t-shirt-coton-essentiel.svg', 1, 1),
+  (1, 'assets/images/placeholders/t-shirt-coton-essentiel-2.svg', 2, 0),
+  (2, 'assets/images/placeholders/t-shirt-oversize-atlas.svg', 1, 1),
+  (2, 'assets/images/placeholders/t-shirt-oversize-atlas-2.svg', 2, 0),
+  (3, 'assets/images/placeholders/chemise-oxford-classic.svg', 1, 1),
+  (3, 'assets/images/placeholders/chemise-oxford-classic-2.svg', 2, 0),
+  (4, 'assets/images/placeholders/chemise-lin-safi.svg', 1, 1),
+  (4, 'assets/images/placeholders/chemise-lin-safi-2.svg', 2, 0),
+  (5, 'assets/images/placeholders/pantalon-chino-medina.svg', 1, 1),
+  (5, 'assets/images/placeholders/pantalon-chino-medina-2.svg', 2, 0),
+  (6, 'assets/images/placeholders/pantalon-cargo-nomade.svg', 1, 1),
+  (6, 'assets/images/placeholders/pantalon-cargo-nomade-2.svg', 2, 0),
+  (7, 'assets/images/placeholders/veste-jean-indigo.svg', 1, 1),
+  (7, 'assets/images/placeholders/veste-jean-indigo-2.svg', 2, 0),
+  (8, 'assets/images/placeholders/blouson-nuit.svg', 1, 1),
+  (8, 'assets/images/placeholders/blouson-nuit-2.svg', 2, 0),
+  (9, 'assets/images/placeholders/ensemble-chemise-pantalon-signature.svg', 1, 1),
+  (9, 'assets/images/placeholders/ensemble-chemise-pantalon-signature-2.svg', 2, 0),
+  (10, 'assets/images/placeholders/ensemble-polo-short-ete.svg', 1, 1),
+  (10, 'assets/images/placeholders/ensemble-polo-short-ete-2.svg', 2, 0),
+  (11, 'assets/images/placeholders/casquette-newstylesafi.svg', 1, 1),
+  (11, 'assets/images/placeholders/casquette-newstylesafi-2.svg', 2, 0),
+  (12, 'assets/images/placeholders/ceinture-cuir-safi.svg', 1, 1),
+  (12, 'assets/images/placeholders/ceinture-cuir-safi-2.svg', 2, 0);
 
 -- ----------------------------
 -- Code promo de bienvenue

@@ -602,7 +602,7 @@ final class ThemeStore
         $hex = ltrim($hex, '#');
 
         if (strlen($hex) !== 6) {
-            $hex = '704F38';
+            $hex = 'FFD400';
         }
 
         $r = hexdec(substr($hex, 0, 2));

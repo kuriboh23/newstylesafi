@@ -492,10 +492,10 @@ final class ReskinController
 
         if ($products === []) {
             $products = [
-                ['id' => 1, 'title' => 'Robe longue Sultan', 'slug' => '', 'price' => 349, 'sale_price' => 199, 'stock' => 8, 'category_name' => 'Femme', 'is_flash' => 1, 'primary_image' => 'images/placeholders/robe-longue-sultan.svg'],
-                ['id' => 2, 'title' => 'Pyjama satin Istanbul', 'slug' => '', 'price' => 279, 'sale_price' => 219, 'stock' => 5, 'category_name' => 'Pyjamas', 'is_flash' => 0, 'primary_image' => 'images/placeholders/ensemble-pyjama-satin-istanbul.svg'],
-                ['id' => 3, 'title' => 'Trench automne', 'slug' => '', 'price' => 499, 'sale_price' => null, 'stock' => 12, 'category_name' => 'Femme', 'is_flash' => 0, 'primary_image' => 'images/placeholders/trench-automne.svg'],
-                ['id' => 4, 'title' => 'T-shirt coton douceur', 'slug' => '', 'price' => 129, 'sale_price' => 99, 'stock' => 3, 'category_name' => 'Enfants', 'is_flash' => 0, 'primary_image' => 'images/placeholders/t-shirt-coton-douceur.svg'],
+                ['id' => 1, 'title' => 'Chemise oxford « Classic »', 'slug' => '', 'price' => 229, 'sale_price' => 189, 'stock' => 8, 'category_name' => 'Chemises', 'is_flash' => 1, 'primary_image' => 'images/placeholders/chemise-oxford-classic.svg'],
+                ['id' => 2, 'title' => 'T-shirt coton « Essentiel »', 'slug' => '', 'price' => 99, 'sale_price' => null, 'stock' => 20, 'category_name' => 'T-shirts', 'is_flash' => 0, 'primary_image' => 'images/placeholders/t-shirt-coton-essentiel.svg'],
+                ['id' => 3, 'title' => 'Veste en jean « Indigo »', 'slug' => '', 'price' => 399, 'sale_price' => null, 'stock' => 12, 'category_name' => 'Vestes', 'is_flash' => 0, 'primary_image' => 'images/placeholders/veste-jean-indigo.svg'],
+                ['id' => 4, 'title' => 'Pantalon chino « Medina »', 'slug' => '', 'price' => 249, 'sale_price' => 199, 'stock' => 3, 'category_name' => 'Pantalons', 'is_flash' => 0, 'primary_image' => 'images/placeholders/pantalon-chino-medina.svg'],
             ];
         }
 
@@ -515,10 +515,10 @@ final class ReskinController
 
         if ($categories === []) {
             $categories = [
-                ['name' => 'Femme', 'slug' => 'femme', 'icon' => 'dress'],
-                ['name' => 'Enfants', 'slug' => 'enfants', 'icon' => 'users'],
-                ['name' => 'Pyjamas', 'slug' => 'pyjamas', 'icon' => 'moon'],
-                ['name' => 'Robes', 'slug' => 'robes', 'icon' => 'shirt'],
+                ['name' => 'T-shirts', 'slug' => 'tshirts', 'icon' => 'tshirt'],
+                ['name' => 'Chemises', 'slug' => 'chemises', 'icon' => 'shirt'],
+                ['name' => 'Pantalons', 'slug' => 'pantalons', 'icon' => 'pants'],
+                ['name' => 'Vestes', 'slug' => 'vestes', 'icon' => 'jacket'],
             ];
         }
 

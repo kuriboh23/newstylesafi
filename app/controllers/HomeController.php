@@ -22,8 +22,8 @@ final class HomeController
         $offerEnd   = Product::nextFlashEnd();
 
         View::render('home', [
-            'title'       => store_name() . ' — Mode turque femme & enfant',
-            'description' => store_name() . ' : vêtements et pyjamas turcs pour femme et enfant au Maroc.',
+            'title'       => store_name() . ' — Mode homme à Safi, Maroc',
+            'description' => store_name() . ' : vêtements homme à Safi, Maroc. T-shirts, chemises, pantalons et vestes, commande sur WhatsApp.',
             'canonical'   => url('/'),
             'slides'      => $slides,
             'whyUs'       => $whyUs,

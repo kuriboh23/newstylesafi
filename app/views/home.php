@@ -35,15 +35,16 @@ $categoryIcon = static function (array $category): string {
     }
 
     return match (true) {
-        str_contains((string) ($category['slug'] ?? ''), 'enfant') => 'users',
-        str_contains((string) ($category['slug'] ?? ''), 'pyjama') => 'moon',
-        str_contains((string) ($category['slug'] ?? ''), 'femme')  => 'dress',
-        default                                                   => 'shirt',
+        str_contains((string) ($category['slug'] ?? ''), 'chemise') => 'shirt',
+        str_contains((string) ($category['slug'] ?? ''), 'tshirt')  => 'tshirt',
+        str_contains((string) ($category['slug'] ?? ''), 'pantalon') => 'pants',
+        str_contains((string) ($category['slug'] ?? ''), 'veste')   => 'jacket',
+        default                                                     => 'shirt',
     };
 };
 ?>
 <section class="hero" aria-labelledby="heroTitle">
-    <h1 class="visually-hidden" id="heroTitle"><?= e(store_name()) ?> — mode turque femme et enfant</h1>
+    <h1 class="visually-hidden" id="heroTitle"><?= e(store_name()) ?> — mode homme à Safi, Maroc</h1>
 
     <div class="hero-track" id="heroTrack">
         <?php foreach ($slides as $slide): ?>

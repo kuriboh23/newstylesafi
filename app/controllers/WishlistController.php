@@ -15,7 +15,7 @@ final class WishlistController
     {
         View::render('wishlist', [
             'title'       => 'Mes favoris — ' . store_name(),
-            'description' => 'Votre sélection de produits favoris chez Shoop Moda Style.',
+            'description' => 'Votre sélection de produits favoris chez ' . store_name() . '.',
             'canonical'   => url('/favoris'),
             'cartCount'   => Cart::count(),
             'wishCount'   => Wishlist::count(),

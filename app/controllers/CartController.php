@@ -281,9 +281,9 @@ final class CartController
         $lines[] = '*💰 Total*';
         $lines[] = 'Sous-total : ' . format_price($subtotal);
         $lines[] = 'Livraison : ' . ($delivery > 0 ? format_price($delivery) : 'Offerte');
-        $lines[] = '*À payer à la livraison : ' . format_price($subtotal + $delivery) . '*';
+        $lines[] = '*Total : ' . format_price($subtotal + $delivery) . '*';
         $lines[] = '';
-        $lines[] = 'Merci de confirmer la commande. 🙏';
+        $lines[] = 'Merci de confirmer la commande et la disponibilité. 🙏';
 
         return implode("\n", $lines);
     }

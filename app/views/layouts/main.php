@@ -20,7 +20,7 @@ $siteName    = store_name();
 $pageTitle   = $title ?? $siteName;
 
 
-$pageDesc    = $description ?? 'Mode turque femme et enfant au Maroc. Commandez facilement via WhatsApp.';
+$pageDesc    = $description ?? 'Vêtements homme à Safi, Maroc. Commandez facilement via WhatsApp.';
 
 // RESKIN: a theme only loads when the owner explicitly applied it. Without
 // that, the storefront is byte-for-byte the original design.
@@ -50,7 +50,7 @@ $wishCount   = $wishCount ?? 0;
     <?php endif; ?>
     <link rel="canonical" href="<?= e($canonicalUrl) ?>">
 
-    <meta name="theme-color" content="#A9552F">
+    <meta name="theme-color" content="#080808">
     <meta name="format-detection" content="telephone=no">
 
     <meta property="og:type" content="website">
@@ -63,6 +63,7 @@ $wishCount   = $wishCount ?? 0;
 
     <link rel="icon" href="<?= e(url('favicon.svg')) ?>" type="image/svg+xml">
     <link rel="stylesheet" href="<?= e(asset('css/app.css')) ?>">
+    <link rel="stylesheet" href="<?= e(asset('css/brand.css')) ?>">
     <?php if ($reskinApplied): ?>
         <link rel="stylesheet" href="<?= e(\App\Reskin\ThemeStore::cssUrl()) ?>">
     <?php endif; ?>

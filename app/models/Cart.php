@@ -97,7 +97,11 @@ final class Cart
 
     public static function deliveryFee(float $subtotal): float
     {
-        if ($subtotal >= 500) {
+        // Free delivery above a threshold is a business setting, not a rule
+        // baked into the code. 0 disables it.
+        $threshold = (float) config('free_shipping_threshold', 0);
+
+        if ($threshold > 0 && $subtotal >= $threshold) {
             return 0;
         }
 

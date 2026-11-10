@@ -20,7 +20,7 @@ declare(strict_types=1);
 
         <label class="field">
             <span class="field-label">Nom</span>
-            <input class="input" type="text" name="name" maxlength="100" required placeholder="Ex. Robes">
+            <input class="input" type="text" name="name" maxlength="100" required placeholder="Ex. Chemises">
         </label>
 
         <label class="field">

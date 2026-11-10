@@ -36,9 +36,10 @@ $navItems = [
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title><?= e($pageTitle) ?></title>
     <meta name="robots" content="noindex, nofollow">
-    <meta name="theme-color" content="#1B1A18">
+    <meta name="theme-color" content="#080808">
     <link rel="icon" href="<?= e(url('favicon.svg')) ?>" type="image/svg+xml">
     <link rel="stylesheet" href="<?= e(asset('css/app.css')) ?>">
+    <link rel="stylesheet" href="<?= e(asset('css/brand.css')) ?>">
     <script src="<?= e(asset('js/app.js')) ?>" defer></script>
 </head>
 <body class="admin-body">

@@ -27,16 +27,16 @@ final class AdminController
      * understood by app/helpers/icons.php.
      */
     private const CATEGORY_ICONS = [
-        'shirt'  => 'Vêtement',
-        'dress'  => 'Robe',
+        'shirt'  => 'Chemise',
+        'tshirt' => 'T-shirt',
         'jacket' => 'Veste',
-        'moon'   => 'Pyjama / nuit',
-        'users'  => 'Enfants',
+        'pants'  => 'Pantalon',
         'shoe'   => 'Chaussure',
-        'tag'    => 'Étiquette',
+        'tag'    => 'Accessoire',
         'gift'   => 'Cadeau',
         'star'   => 'Étoile',
         'home'   => 'Maison',
+        'users'  => 'Collection',
     ];
 
     /* ------------------------------------------------------------------

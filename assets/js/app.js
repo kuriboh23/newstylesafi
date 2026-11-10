@@ -1,5 +1,5 @@
 /* ==================================================================
-   Shoop Moda Style — app.js
+   Newstylesafi — app.js
    Vanilla JS only. Loaded with `defer`, no inline scripts (strict CSP).
    ================================================================== */
 (function () {
@@ -266,7 +266,7 @@
     window.SM.setBadge = setBadge;
 })();
 /* ==================================================================
-   Shoop Moda Style — storefront interactions
+   Newstylesafi — storefront interactions
    Product cards, wishlist, gallery, options, cart, countdown.
    ================================================================== */
 (function () {
@@ -499,7 +499,7 @@
     }
 })();
 /* ==================================================================
-   Shoop Moda Style — refresh interactions
+   Newstylesafi — refresh interactions
    Add to cart without leaving the page, toast, catalogue sorting.
    ================================================================== */
 (function () {
@@ -628,7 +628,7 @@
 })();
 
 /* ==================================================================
-   Shoop Moda Style — search suggestions, history, admin helpers
+   Newstylesafi — search suggestions, history, admin helpers
    ================================================================== */
 (function () {
     'use strict';

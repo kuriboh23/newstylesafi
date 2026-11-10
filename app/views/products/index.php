@@ -51,7 +51,7 @@ $catalogUrl = static function (array $overrides = []) use ($query, $activeCatego
             <p class="catalog-meta">
                 <span><?= $total ?> <?= $total === 1 ? 'pièce' : 'pièces' ?></span>
                 <span aria-hidden="true">·</span>
-                <span>Femme, enfant, pyjamas et robes</span>
+                <span>T-shirts, chemises, pantalons et vestes</span>
             </p>
         </div>
 

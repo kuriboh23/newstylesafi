@@ -25,6 +25,7 @@ $pageTitle = $title ?? 'Aperçu';
     <title><?= e($pageTitle) ?></title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="<?= e(asset('css/app.css')) ?>">
+    <link rel="stylesheet" href="<?= e(asset('css/brand.css')) ?>">
     <style><?= $tokenCss ?></style>
     <link rel="stylesheet" href="<?= e(asset('css/reskin-skin.css')) ?>">
     <style>
@@ -33,7 +34,7 @@ $pageTitle = $title ?? 'Aperçu';
         }
 
         .rs-preview-focus {
-            outline: 2px dashed #704F38;
+            outline: 2px dashed #FFD400;
             outline-offset: 3px;
         }
     </style>

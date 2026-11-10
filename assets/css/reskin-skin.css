@@ -57,8 +57,8 @@ body {
     height: var(--rs-header-h, 65px);
     min-height: var(--rs-header-h, 65px);
     padding-block: 0;
-    background: var(--rs-header-bg, #FFFFFF);
-    border-bottom-color: var(--rs-header-border, #EDEDED);
+    background: var(--rs-header-bg, #080808);
+    border-bottom-color: var(--rs-header-border, #292929);
 }
 
 body[data-rs-sticky="off"] .site-header {
@@ -74,7 +74,7 @@ body[data-rs-sticky="off"] .site-header {
 }
 
 .nav-link {
-    color: var(--rs-nav-color, #1F2029);
+    color: var(--rs-nav-color, #F5F5F5);
 }
 
 .nav-link:hover,
@@ -134,7 +134,7 @@ body[data-rs-sticky="off"] .site-header {
     border-radius: var(--rs-offer-radius);
     background:
         radial-gradient(120% 130% at 100% 0%, var(--rs-offer-glow), transparent 58%),
-        linear-gradient(135deg, var(--rs-offer-bg) 0%, #FCF9F5 55%, #FFFFFF 100%);
+        linear-gradient(135deg, var(--rs-offer-bg) 0%, #0D0D0D 55%, #080808 100%);
 }
 
 body[data-rs-offer="solid"] .offer-panel {
@@ -227,8 +227,8 @@ body[data-rs-hover="on"] .product-card:hover {
 
 /* Keep the original hover depth when the owner did not ask for another one. */
 body[data-rs-hover="on"][data-rs-card="elevated"] .product-card:hover {
-    border-color: #D9C8B6;
-    box-shadow: 0 12px 26px rgba(27, 26, 24, 0.09);
+    border-color: #FFD400;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55);
 }
 
 body[data-rs-hover="off"] .product-card:hover {

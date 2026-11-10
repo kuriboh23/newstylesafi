@@ -13,7 +13,8 @@ declare(strict_types=1);
  */
 
 $itemCount = count($items);
-$freeShipping = $subtotal >= 500;
+$freeThreshold = (float) config('free_shipping_threshold', 0);
+$freeShipping  = $freeThreshold > 0 && $subtotal >= $freeThreshold;
 ?>
 <section
     class="wrap cart-page"
@@ -118,7 +119,7 @@ $freeShipping = $subtotal >= 500;
                     </div>
                     <?php if ($freeShipping): ?>
                         <div class="summary-row summary-row--highlight">
-                            <span>Livraison offerte dès 500 DH</span>
+                            <span>Livraison offerte dès <?= e(format_price($freeThreshold)) ?></span>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -132,7 +133,7 @@ $freeShipping = $subtotal >= 500;
 
                 <p class="summary-note">
                     <?= icon('truck', 'icon icon--sm') ?>
-                    Livraison 24-48h partout au Maroc
+                    Livraison confirmée avec la boutique
                 </p>
 
                 <div class="summary-actions">
@@ -152,7 +153,7 @@ $freeShipping = $subtotal >= 500;
                 </div>
 
                 <div class="payment-methods">
-                    <span class="payment-label">Paiement à la livraison</span>
+                    <span class="payment-label">Aucun paiement en ligne</span>
                 </div>
             </aside>
         </div>
@@ -162,7 +163,7 @@ $freeShipping = $subtotal >= 500;
             <h2>Votre panier est vide</h2>
             <p>Découvrez notre collection et trouvez votre prochaine pièce favorite.</p>
             <div class="empty-actions">
-                <a class="btn btn--dark btn--block" href="<?= e(url('/categorie/femme')) ?>">
+                <a class="btn btn--dark btn--block" href="<?= e(url('/produits')) ?>">
                     Découvrir la collection
                 </a>
                 <a

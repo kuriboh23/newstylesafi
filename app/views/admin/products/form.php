@@ -167,7 +167,7 @@ $error    = static fn (string $key): string => isset($errors[$key]) ? ' is-inval
                     type="text"
                     name="colors"
                     value="<?= e($colorsValue) ?>"
-                    placeholder="Noir:#1B1A18, Beige:#C2A691"
+                    placeholder="Noir:#080808, Jaune:#FFD400"
                 >
                 <span class="field-hint">Nom:#hex, séparées par des virgules.</span>
             </label>

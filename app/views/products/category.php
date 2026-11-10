@@ -23,7 +23,7 @@ $totalPages   = (int) ($products['total_pages'] ?? 1);
             <p class="page-meta">
                 <span><?= $total ?> <?= $total === 1 ? 'pièce' : 'pièces' ?></span>
                 <span aria-hidden="true">·</span>
-                <span>Livraison 24-48h partout au Maroc</span>
+                <span>Commande sur WhatsApp</span>
             </p>
         </div>
     </header>

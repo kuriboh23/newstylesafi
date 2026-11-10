@@ -18,7 +18,7 @@ declare(strict_types=1);
  * @var array<int, string>              $wishSlugs
  */
 
-$popularTerms = ['pyjama', 'robe', 'ensemble', 'satin', 'femme', 'enfant'];
+$popularTerms = ['t-shirt', 'chemise', 'pantalon', 'veste', 'ensemble', 'accessoire'];
 $resultCount  = count($results);
 $shownQuery   = $suggested ?? $query;
 ?>
@@ -49,7 +49,7 @@ $shownQuery   = $suggested ?? $query;
                 id="siteSearchInput"
                 name="q"
                 value="<?= e($query) ?>"
-                placeholder="Robe, pyjama, ensemble…"
+                placeholder="T-shirt, chemise, pantalon…"
                 autocomplete="off"
                 role="combobox"
                 aria-autocomplete="list"

@@ -28,7 +28,7 @@ final class ProductController
 
         View::render('products/category', [
             'title'       => $category['name'] . ' — ' . store_name(),
-            'description' => 'Découvrez la collection ' . $category['name'] . ' chez Shoop Moda Style. Vêtements turcs femme et enfant au Maroc.',
+            'description' => 'Découvrez la collection ' . $category['name'] . ' chez ' . store_name() . '. Mode homme à Safi, Maroc.',
             'canonical'   => url('/categorie/' . $slug),
             'cartCount'   => Cart::count(),
             'wishCount'   => Wishlist::count(),
@@ -111,7 +111,7 @@ final class ProductController
 
         View::render('products/index', [
             'title'          => 'Toutes les pièces — ' . store_name(),
-            'description'    => 'Parcourez toutes les pièces Shoop Moda Style : femme, enfant, pyjamas et robes importés de Turquie.',
+            'description'    => 'Parcourez toutes les pièces ' . store_name() . ' : t-shirts, chemises, pantalons, vestes et accessoires homme.',
             'canonical'      => url('/produits'),
             'cartCount'      => Cart::count(),
             'wishCount'      => Wishlist::count(),
@@ -130,7 +130,7 @@ final class ProductController
     {
         View::render('products/promotions', [
             'title'       => 'Promotions — ' . store_name(),
-            'description' => 'Offres flash et promotions en cours chez Shoop Moda Style.',
+            'description' => 'Offres et promotions en cours chez ' . store_name() . '.',
             'canonical'   => url('/promotions'),
             'cartCount'   => Cart::count(),
             'wishCount'   => Wishlist::count(),

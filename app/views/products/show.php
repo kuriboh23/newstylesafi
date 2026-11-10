@@ -173,9 +173,9 @@ $categoryUrl = !empty($product['category_slug']) ? url('/categorie/' . $product[
             </button>
 
             <div class="trust-badges">
-                <div class="trust-item"><?= icon('truck', 'icon icon--sm') ?><span>Livraison 24-48h</span></div>
-                <div class="trust-item"><?= icon('shield', 'icon icon--sm') ?><span>Paiement à la livraison</span></div>
-                <div class="trust-item"><?= icon('refresh', 'icon icon--sm') ?><span>Échange sous 7 jours</span></div>
+                <div class="trust-item"><?= icon('whatsapp', 'icon icon--sm') ?><span>Commande sur WhatsApp</span></div>
+                <div class="trust-item"><?= icon('tag', 'icon icon--sm') ?><span>Tailles et couleurs au choix</span></div>
+                <div class="trust-item"><?= icon('check-circle', 'icon icon--sm') ?><span>Confirmation par la boutique</span></div>
             </div>
 
             <?php /* Adds the piece to the cart and goes straight to the details form. */ ?>

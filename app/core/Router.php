@@ -15,8 +15,8 @@ namespace App\Core;
  * method as a string argument, in the order it appears in the path.
  *
  * Paths are compared WITHOUT the folder the site is installed in: if the
- * shop runs at https://example.com/shop/, the request /shop/produit/robe is
- * matched against /produit/robe. This is why the same files work at the
+ * shop runs at https://example.com/shop/, the request /shop/produit/chemise is
+ * matched against /produit/chemise. This is why the same files work at the
  * domain root (htdocs/) and inside a sub-folder (htdocs/shop/) with no
  * configuration at all.
  */
@@ -56,7 +56,7 @@ final class Router
 
     /**
      * Path of the current request, without the query string and without the
-     * install folder. "/shop/produit/robe/?x=1" becomes "/produit/robe".
+     * install folder. "/shop/produit/chemise/?x=1" becomes "/produit/chemise".
      */
     public static function path(): string
     {
@@ -71,7 +71,7 @@ final class Router
             return $path === '/' ? '/' : rtrim($path, '/');
         }
 
-        // Clean URLs: the page is in the path, "/produit/robe".
+        // Clean URLs: the page is in the path, "/produit/chemise".
         $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
         $path = is_string($path) ? rawurldecode($path) : '/';
 

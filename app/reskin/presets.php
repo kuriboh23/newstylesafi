@@ -18,8 +18,8 @@ declare(strict_types=1);
 
 return [
     'default' => [
-        'label'       => 'Original',
-        'description' => 'Le design d’origine complet : polices, tailles, couleurs et espacements.',
+        'label'       => 'Newstylesafi',
+        'description' => 'L’identité de la boutique : noir profond, jaune vif et surfaces anthracite.',
         'values'      => [],
     ],
 

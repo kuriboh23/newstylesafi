@@ -29,7 +29,12 @@ return [
     // ======================================================================
 
     // Name used in page titles, the footer and WhatsApp messages.
-    'app_name' => 'Shoop Moda Style',
+    'app_name' => 'Newstylesafi',
+
+    // The wordmark is split after this prefix: "New" + "stylesafi".
+    // The second part is drawn in the accent colour. Leave empty to split
+    // on the first space of the shop name instead.
+    'brand_split' => 'New',
 
     // "production" hides errors from visitors. Leave it as it is.
     'app_env' => 'production',
@@ -39,7 +44,7 @@ return [
     // then back to false once the shop works.
     'app_debug' => false,
 
-    // Pretty URLs: /produit/robe instead of /?p=/produit/robe.
+    // Pretty URLs: /produit/chemise instead of /?p=/produit/chemise.
     // They work thanks to the .htaccess file next to this one, which simply
     // forwards every page to index.php. Keep it true.
     // If your host shows a 404 on every page (it ignores .htaccess), or if
@@ -54,12 +59,20 @@ return [
     // Price suffix shown everywhere ("DH 249").
     'currency' => 'DH',
 
+    // Order total above which delivery becomes free, in DH.
+    // 0 disables free delivery: the fee below then always applies.
+    'free_shipping_threshold' => 500,
+
     // WhatsApp number that receives the orders.
     // Country code first, digits only, no "+" and no spaces.
-    'whatsapp_number' => '212725605520',
+    //
+    // !! PLACEHOLDER !! 212600000000 is a stand-in, not a real line.
+    // Replace it with the confirmed Newstylesafi order number (or save it
+    // in RESKIN -> Boutique) before the site goes live.
+    'whatsapp_number' => '212600000000',
 
     // Instagram link in the footer (empty string hides it).
-    'instagram_url' => 'https://instagram.com/shoop.moda_style',
+    'instagram_url' => 'https://www.instagram.com/newstylesafi/',
 
 
     // ======================================================================
@@ -71,8 +84,8 @@ return [
     'admin_path' => 'gestion',
 
     // Login of the admin area. Change the password before going live.
-    'admin_email'    => 'admin@shoopmoda.ma',
-    'admin_password' => 'shoopmoda2026',
+    'admin_email'    => 'admin@newstylesafi.ma',
+    'admin_password' => 'newstylesafi2026',
 
     // Random text used to sign cookies. Any long random string works.
     'cookie_secret' => 'change-this-to-a-long-random-string',
@@ -98,15 +111,18 @@ return [
     // Local XAMPP:        host 127.0.0.1 | user root  | password empty
     // InfinityFree:       copy the four values from the panel:
     //                     "MySQL Hostname"  -> db_host   (sql123.infinityfree.com)
-    //                     "Database Name"   -> db_name   (if0_12345678_shoopmoda)
+    //                     "Database Name"   -> db_name   (if0_12345678_newstylesafi)
     //                     "Username"        -> db_user   (if0_12345678)
     //                     account password  -> db_pass
     // Keep the database name and the username exactly as the panel shows
     // them, prefix included (if0_ with a zero, not the letter o).
+    //
+    // If you kept the previous database and imported the new dump into it,
+    // set db_name to that database name instead.
 
     'db_host'    => '127.0.0.1',
     'db_port'    => 3306,
-    'db_name'    => 'shoopmoda',
+    'db_name'    => 'newstylesafi',
     'db_user'    => 'root',
     'db_pass'    => '',
     'db_charset' => 'utf8mb4',
@@ -118,15 +134,15 @@ return [
 
     // Scrolling bar at the very top of every page.
     'announcement' => [
-        'highlight' => 'Mode turque premium',
-        'text'      => 'Livraison rapide partout au Maroc',
-        'location'  => 'Maroc',
+        'highlight' => 'Nouvelle collection homme',
+        'text'      => 'Commande simple sur WhatsApp',
+        'location'  => 'Safi, Maroc',
         'messages'  => [
-            'Mode turque premium importée d’Istanbul',
-            'Livraison 24-48h partout au Maroc',
+            'Nouvelle collection homme disponible',
+            'T-shirts, chemises, pantalons et vestes',
             'Commande simple et directe sur WhatsApp',
-            'Nouveautés chaque semaine',
-            'Produits authentiques 100% turcs',
+            'Nouvelles pièces ajoutées régulièrement',
+            'Boutique officielle Newstylesafi — Safi, Maroc',
         ],
     ],
 
@@ -135,46 +151,46 @@ return [
     // cta = button label, link = where it goes, theme = light or dark.
     'hero_slides' => [
         [
-            'eyebrow' => 'Shoop Moda Style',
-            'title'   => 'Nouvelle Collection',
-            'text'    => 'Découvrez les nouveautés de la saison',
+            'eyebrow' => 'Newstylesafi',
+            'title'   => 'La nouvelle collection',
+            'text'    => 'Des pièces masculines choisies pour un vestiaire net et actuel.',
             'cta'     => 'Découvrir',
-            'link'    => '/categorie/femme',
-            'theme'   => 'light',
-        ],
-        [
-            'eyebrow' => 'Confort premium',
-            'title'   => 'Pyjamas & Ensembles',
-            'text'    => 'Des tissus turcs doux pour vos soirées',
-            'cta'     => 'Voir la collection',
-            'link'    => '/categorie/pyjamas',
+            'link'    => '/produits',
             'theme'   => 'dark',
         ],
         [
-            'eyebrow' => 'Pour les petits',
-            'title'   => 'Mode Enfants',
-            'text'    => 'Des tenues tendres et élégantes',
-            'cta'     => 'Explorer',
-            'link'    => '/categorie/enfants',
+            'eyebrow' => 'Les essentiels',
+            'title'   => 'T-shirts & chemises',
+            'text'    => 'Des coupes propres et des matières agréables, au quotidien.',
+            'cta'     => 'Voir la sélection',
+            'link'    => '/categorie/chemises',
             'theme'   => 'light',
+        ],
+        [
+            'eyebrow' => 'Safi, Maroc',
+            'title'   => 'Commander sur WhatsApp',
+            'text'    => 'Choisissez vos tailles et vos couleurs, puis envoyez votre commande.',
+            'cta'     => 'Voir la boutique',
+            'link'    => '/produits',
+            'theme'   => 'dark',
         ],
     ],
 
     // Four trust badges under the slider.
     'why_us' => [
-        ['icon' => 'shield',   'title' => '100% Turc',       'text' => 'Tissus authentiques importés d’Istanbul.'],
-        ['icon' => 'truck',    'title' => 'Livraison rapide', 'text' => 'Expédition express dans tout le Maroc.'],
-        ['icon' => 'users',    'title' => 'Femme & Enfant',   'text' => 'Élégance et pyjamas douillets pour toutes.'],
-        ['icon' => 'whatsapp', 'title' => 'Commande facile',  'text' => 'Commande instantanée via WhatsApp.'],
+        ['icon' => 'shield',   'title' => 'Sélection premium',     'text' => 'Des pièces masculines choisies avec soin.'],
+        ['icon' => 'tag',      'title' => 'Tailles & couleurs',    'text' => 'Chaque fiche indique les options disponibles.'],
+        ['icon' => 'whatsapp', 'title' => 'Commande sur WhatsApp', 'text' => 'Votre commande part directement vers la boutique.'],
+        ['icon' => 'users',    'title' => 'Contact direct',        'text' => 'La boutique confirme la disponibilité avec vous.'],
     ],
 
     // Promo banner near the bottom of the home page.
     // Keep the wording factual: only promise what the catalogue offers.
     'promo_banner' => [
-        'badge' => 'Offre limitée',
-        'title' => 'Nouveautés à prix de lancement',
-        'text'  => 'Une sélection de pièces de la saison à prix réduit, dans la limite des stocks disponibles.',
-        'cta'   => 'Voir les promotions',
-        'link'  => '/promotions',
+        'badge' => 'Nouveautés',
+        'title' => 'La collection est en ligne',
+        'text'  => 'Parcourez les pièces disponibles et retrouvez tous les détails sur chaque fiche produit.',
+        'cta'   => 'Voir la boutique',
+        'link'  => '/produits',
     ],
 ];

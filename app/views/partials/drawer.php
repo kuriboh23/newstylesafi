@@ -127,7 +127,7 @@ $logo = site_logo_url();
         </div>
     </div>
 
-    <p class="drawer-foot"><?= icon('truck', 'icon icon--sm') ?> Livraison partout au Maroc</p>
+    <p class="drawer-foot"><?= icon('truck', 'icon icon--sm') ?> Commande sur WhatsApp</p>
 </aside>
 
 <div class="drawer-overlay" id="drawerOverlay" hidden></div>

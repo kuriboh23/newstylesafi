@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Visuel de démonstration — Signature">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F0F0F"/>
+      <stop offset="1" stop-color="#080808"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <circle cx="150" cy="220" r="180" fill="#FFD400" opacity="0.07"/><circle cx="690" cy="810" r="220" fill="#FFD400" opacity="0.10"/>
+  <rect x="56" y="56" width="688" height="888" rx="4" fill="none" stroke="#292929"/><line x1="56" y1="230" x2="744" y2="230" stroke="#292929"/>
+  <text x="400" y="165" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
+        font-size="22" font-weight="800" letter-spacing="8" fill="#FFFFFF">NEW<tspan fill="#FFD400">STYLESAFI</tspan></text>
+  <text x="400" y="470" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
+        font-size="190" font-weight="800" fill="#FFD400">S</text>
+  <text x="400" y="680" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
+        font-size="30" font-weight="700" letter-spacing="10" fill="#FFFFFF">SIGNATURE</text>
+  <line x1="330" y1="680" x2="470" y2="680" stroke="#FFD400" stroke-width="2" transform="translate(0 40)"/>
+  <text x="400" y="860" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
+        font-size="16" letter-spacing="6" fill="#BDBDBD">PHOTO À VENIR</text>
+</svg>

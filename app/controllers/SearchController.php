@@ -34,7 +34,7 @@ final class SearchController
 
         View::render('search', [
             'title'       => ($query !== '' ? $query . ' — ' : '') . 'Recherche — ' . store_name(),
-            'description' => 'Recherchez un pyjama, une robe ou un ensemble dans la boutique Shoop Moda Style.',
+            'description' => 'Recherchez un t-shirt, une chemise ou un pantalon dans la boutique ' . store_name() . '.',
             'canonical'   => url('/recherche'),
             'cartCount'   => Cart::count(),
             'wishCount'   => Wishlist::count(),

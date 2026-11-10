@@ -1,0 +1,18 @@
+[2026-11-10 17:39:21] PDOException: Connexion à la base de données impossible. in A:\Xampp\htdocs\newstylesafi\app\core\Database.php:101
+
+[2026-11-10 17:39:29] PDOException: Connexion à la base de données impossible. in A:\Xampp\htdocs\newstylesafi\app\core\Database.php:101
+
+[2026-11-10 17:39:31] PDOException: Connexion à la base de données impossible. in A:\Xampp\htdocs\newstylesafi\app\core\Database.php:101
+
+[2026-11-10 17:39:32] PDOException: Connexion à la base de données impossible. in A:\Xampp\htdocs\newstylesafi\app\core\Database.php:101
+
+[2026-11-10 17:48:53] ParseError: syntax error, unexpected single-quoted string "canonical", expecting "]" in A:\Xampp\htdocs\newstylesafi\app\controllers\ProductController.php:32
+
+[2026-11-10 17:55:21] PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'newstylesafi.products' doesn't exist in A:\Xampp\htdocs\newstylesafi\app\core\Database.php:115
+
+[2026-11-10 17:55:22] PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'newstylesafi.products' doesn't exist in A:\Xampp\htdocs\newstylesafi\app\core\Database.php:115
+
+[2026-11-10 17:55:30] PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'newstylesafi.products' doesn't exist in A:\Xampp\htdocs\newstylesafi\app\core\Database.php:115
+
+[2026-11-10 17:55:31] PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'newstylesafi.products' doesn't exist in A:\Xampp\htdocs\newstylesafi\app\core\Database.php:115
+

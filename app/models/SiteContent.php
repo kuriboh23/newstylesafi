@@ -214,19 +214,19 @@ final class SiteContent
             'why' => [
                 'eyebrow' => 'Nos engagements',
                 'title'   => 'Pourquoi nous choisir',
-                'lead'    => 'Des pièces sélectionnées avec soin, une commande simple sur WhatsApp et une livraison partout au Maroc.',
+                'lead'    => 'Des pièces masculines sélectionnées avec soin et une commande simple, directement sur WhatsApp.',
                 'cards'   => $whyCards,
             ],
             'footer' => [
-                'description'   => 'Mode turque premium et pyjamas pour femme et enfant au Maroc. Livraison directe à votre porte.',
-                'logo_sub'      => 'Mode turque femme & enfant',
+                'description'   => 'Vêtements homme à Safi, Maroc. Une sélection de pièces à découvrir et à commander sur WhatsApp.',
+                'logo_sub'      => 'Mode homme — Safi, Maroc',
                 'categories_title' => 'Catégories',
                 'help_title'    => 'Aide',
                 'order_title'   => 'Commande rapide',
-                'pill_1'        => 'Tout le Maroc',
-                'pill_2'        => 'Express 24-48h',
+                'pill_1'        => 'Safi, Maroc',
+                'pill_2'        => 'Commande WhatsApp',
                 'whatsapp_label' => 'Commandez directement via WhatsApp :',
-                'bottom_note'   => 'Conçu pour un shopping mobile rapide au Maroc.',
+                'bottom_note'   => 'Boutique en ligne officielle — Instagram et WhatsApp.',
             ],
         ]);
     }

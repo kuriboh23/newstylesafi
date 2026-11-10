@@ -72,14 +72,14 @@ function config(string $key, mixed $default = null): mixed
 }
 
 /**
- * Should links look like /produit/robe instead of /?p=/produit/robe?
+ * Should links look like /produit/chemise instead of /?p=/produit/chemise?
  *
  * Pretty URLs need the ".htaccess" file sitting next to index.php, because
- * that is what forwards /produit/robe to index.php on the server.
+ * that is what forwards /produit/chemise to index.php on the server.
  *
  * The setting is on, but the file is checked too: FTP clients hide names
  * starting with a dot, so .htaccess is the one file people forget to upload.
- * When it is absent the links quietly become /?p=/produit/robe, which works
+ * When it is absent the links quietly become /?p=/produit/chemise, which works
  * on every host with no configuration at all. Either way the shop runs.
  */
 function pretty_urls(): bool
@@ -215,7 +215,7 @@ function asset(string $path): string
 
 /**
  * Current page path with its query string, without the install folder.
- * Example: "/recherche?q=robe". The routing parameter "p" is left out, so
+ * Example: "/recherche?q=chemise". The routing parameter "p" is left out, so
  * url(current_path()) gives back a working link.
  */
 function current_path(): string
@@ -314,13 +314,29 @@ function store_name(): string
 }
 
 /**
- * Split the store name for the two-tone wordmark ("Shoop" + "Moda Style").
+ * Split the store name for the two-tone wordmark ("New" + "stylesafi").
+ *
+ * "brand_split" in config.php sets the prefix drawn in the accent colour,
+ * which works for a one-word shop name. Without it the name is split on its
+ * first space, so a brand such as "Maison Safi" still gets two tones.
  *
  * @return array{0: string, 1: string}
  */
 function brand_parts(): array
 {
     $name  = store_name();
+    $split = trim((string) config('brand_split', ''));
+
+    if ($split !== '') {
+        $length = mb_strlen($split);
+
+        if (mb_strlen($name) > $length
+            && mb_strtolower(mb_substr($name, 0, $length)) === mb_strtolower($split)
+        ) {
+            return [mb_substr($name, 0, $length), trim(mb_substr($name, $length))];
+        }
+    }
+
     $space = strpos($name, ' ');
 
     if ($space === false) {

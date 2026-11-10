@@ -43,7 +43,7 @@ return [
                 'primary' => [
                     'label'   => 'Couleur principale',
                     'type'    => 'color',
-                    'default' => '#704F38',
+                    'default' => '#FFD400',
                     'var'     => '--primary',
                     'help'    => 'Accents, badges, liens et survols.',
                     'derived' => [
@@ -54,19 +54,19 @@ return [
                 'background' => [
                     'label'   => 'Fond du site',
                     'type'    => 'color',
-                    'default' => '#FFFFFF',
+                    'default' => '#080808',
                     'var'     => '--rs-bg',
                 ],
                 'text' => [
                     'label'   => 'Couleur du texte',
                     'type'    => 'color',
-                    'default' => '#1F2029',
+                    'default' => '#F5F5F5',
                     'var'     => '--rs-text',
                 ],
                 'accent' => [
                     'label'   => 'Couleur d’accent',
                     'type'    => 'color',
-                    'default' => '#704F38',
+                    'default' => '#FFD400',
                     'var'     => '--rs-accent',
                     'help'    => 'Sur-titres, liens « Tout voir » et catégories produits.',
                 ],
@@ -176,19 +176,19 @@ return [
                 'ann_bg' => [
                     'label'   => 'Fond du bandeau',
                     'type'    => 'color',
-                    'default' => '#FFFFFF',
+                    'default' => '#050505',
                     'var'     => '--rs-ann-bg',
                 ],
                 'ann_text' => [
                     'label'   => 'Couleur du texte',
                     'type'    => 'color',
-                    'default' => '#5C5C5C',
+                    'default' => '#BDBDBD',
                     'var'     => '--rs-ann-text',
                 ],
                 'ann_border' => [
                     'label'   => 'Couleur de la bordure',
                     'type'    => 'color',
-                    'default' => '#EDEDED',
+                    'default' => '#292929',
                     'var'     => '--rs-ann-border',
                 ],
                 'ann_height' => [
@@ -228,19 +228,19 @@ return [
                 'hero_light_bg' => [
                     'label'   => 'Fond des slides clairs',
                     'type'    => 'color',
-                    'default' => '#EDEDED',
+                    'default' => '#141414',
                     'var'     => '--rs-hero-light-bg',
                 ],
                 'hero_dark_bg' => [
                     'label'   => 'Fond des slides foncés',
                     'type'    => 'color',
-                    'default' => '#1F2029',
+                    'default' => '#0B0B0B',
                     'var'     => '--rs-hero-dark-bg',
                 ],
                 'hero_dark_bg_2' => [
                     'label'   => 'Seconde teinte (dégradé)',
                     'type'    => 'color',
-                    'default' => '#343644',
+                    'default' => '#1C1C1C',
                     'var'     => '--rs-hero-dark-bg-2',
                 ],
                 'hero_radius' => [
@@ -266,19 +266,19 @@ return [
                 'hero_eyebrow' => [
                     'label'   => 'Couleur du sur-titre',
                     'type'    => 'color',
-                    'default' => '#704F38',
+                    'default' => '#FFD400',
                     'var'     => '--rs-hero-eyebrow',
                 ],
                 'hero_dark_eyebrow' => [
                     'label'   => 'Sur-titre des slides foncés',
                     'type'    => 'color',
-                    'default' => '#C2A691',
+                    'default' => '#FFD400',
                     'var'     => '--rs-hero-dark-eyebrow',
                 ],
                 'hero_light_title' => [
                     'label'   => 'Titre sur fond clair',
                     'type'    => 'color',
-                    'default' => '#1F2029',
+                    'default' => '#FFFFFF',
                     'var'     => '--rs-hero-light-title',
                 ],
                 'hero_dark_title' => [
@@ -290,13 +290,13 @@ return [
                 'hero_light_text' => [
                     'label'   => 'Texte sur fond clair',
                     'type'    => 'color',
-                    'default' => '#5C5C5C',
+                    'default' => '#BDBDBD',
                     'var'     => '--rs-hero-light-text',
                 ],
                 'hero_dark_text' => [
                     'label'   => 'Texte sur fond foncé',
                     'type'    => 'color',
-                    'default' => '#C8C9D1',
+                    'default' => '#BDBDBD',
                     'var'     => '--rs-hero-dark-text',
                 ],
                 'hero_slide_1_eyebrow' => ['label' => 'Sur-titre', 'type' => 'text', 'content' => 'hero.slides.0.eyebrow', 'group' => 'Slide 1', 'max' => 60],
@@ -350,14 +350,14 @@ return [
                 'offer_bg' => [
                     'label'   => 'Couleur du panneau',
                     'type'    => 'color',
-                    'default' => '#F8F1E8',
+                    'default' => '#141414',
                     'var'     => '--rs-offer-bg',
                     'help'    => 'Utilisée par les styles « couleur unie » et « contour ».',
                 ],
                 'offer_border' => [
                     'label'   => 'Bordure',
                     'type'    => 'color',
-                    'default' => '#EADFD2',
+                    'default' => '#292929',
                     'var'     => '--rs-offer-border',
                 ],
                 'offer_radius' => [
@@ -373,7 +373,7 @@ return [
                 'offer_title_color' => [
                     'label'   => 'Couleur du titre',
                     'type'    => 'color',
-                    'default' => '#1F2029',
+                    'default' => '#FFFFFF',
                     'var'     => '--rs-offer-title',
                 ],
                 'offer_title_size' => [
@@ -389,7 +389,7 @@ return [
                 'offer_text_color' => [
                     'label'   => 'Couleur du texte',
                     'type'    => 'color',
-                    'default' => '#5C5C5C',
+                    'default' => '#BDBDBD',
                     'var'     => '--rs-offer-text',
                 ],
                 'offer_badge' => ['label' => 'Badge', 'type' => 'text', 'content' => 'offer.badge', 'group' => 'Contenu de l’offre', 'max' => 60],
@@ -423,25 +423,25 @@ return [
                 'chip_bg' => [
                     'label'   => 'Fond',
                     'type'    => 'color',
-                    'default' => '#FFFFFF',
+                    'default' => '#0F0F0F',
                     'var'     => '--rs-chip-bg',
                 ],
                 'chip_border' => [
                     'label'   => 'Bordure',
                     'type'    => 'color',
-                    'default' => '#E7DFD5',
+                    'default' => '#292929',
                     'var'     => '--rs-chip-border',
                 ],
                 'chip_text' => [
                     'label'   => 'Texte',
                     'type'    => 'color',
-                    'default' => '#1F2029',
+                    'default' => '#F5F5F5',
                     'var'     => '--rs-chip-text',
                 ],
                 'chip_icon' => [
                     'label'   => 'Icônes',
                     'type'    => 'color',
-                    'default' => '#704F38',
+                    'default' => '#FFD400',
                     'var'     => '--rs-chip-icon',
                 ],
                 'categories_title' => ['label' => 'Titre de la rangée', 'type' => 'text', 'content' => 'categories.title', 'group' => 'Contenu', 'max' => 80],
@@ -491,13 +491,13 @@ return [
                 'card_bg' => [
                     'label'   => 'Fond des cartes',
                     'type'    => 'color',
-                    'default' => '#FFFFFF',
+                    'default' => '#0F0F0F',
                     'var'     => '--rs-card-bg',
                 ],
                 'card_border' => [
                     'label'   => 'Couleur des bordures',
                     'type'    => 'color',
-                    'default' => '#E7DFD5',
+                    'default' => '#292929',
                     'var'     => '--rs-card-border',
                 ],
                 'border_width' => [
@@ -533,9 +533,9 @@ return [
                     ],
                     'values' => [
                         'none'   => 'none',
-                        'subtle' => '0 1px 2px rgba(27, 26, 24, 0.04)',
-                        'soft'   => '0 10px 28px rgba(27, 26, 24, 0.08)',
-                        'strong' => '0 18px 46px rgba(27, 26, 24, 0.16)',
+                        'subtle' => '0 1px 2px rgba(0, 0, 0, 0.04)',
+                        'soft'   => '0 10px 28px rgba(0, 0, 0, 0.08)',
+                        'strong' => '0 18px 46px rgba(0, 0, 0, 0.16)',
                     ],
                 ],
                 'product_hover' => [
@@ -571,7 +571,7 @@ return [
                 'price_color' => [
                     'label'   => 'Couleur du prix',
                     'type'    => 'color',
-                    'default' => '#1F2029',
+                    'default' => '#FFFFFF',
                     'var'     => '--rs-price',
                 ],
                 'featured_eyebrow' => ['label' => 'Sur-titre', 'type' => 'text', 'content' => 'featured.eyebrow', 'group' => 'Titres de la section', 'max' => 60],
@@ -590,43 +590,43 @@ return [
                 'why_bg' => [
                     'label'   => 'Fond de la section',
                     'type'    => 'color',
-                    'default' => '#FFFFFF',
+                    'default' => '#080808',
                     'var'     => '--rs-why-bg',
                 ],
                 'why_card_bg' => [
                     'label'   => 'Fond des cartes',
                     'type'    => 'color',
-                    'default' => '#FFFFFF',
+                    'default' => '#0F0F0F',
                     'var'     => '--rs-why-card-bg',
                 ],
                 'why_line' => [
                     'label'   => 'Lignes de séparation',
                     'type'    => 'color',
-                    'default' => '#E7DFD5',
+                    'default' => '#292929',
                     'var'     => '--rs-why-line',
                 ],
                 'why_title' => [
                     'label'   => 'Couleur des titres',
                     'type'    => 'color',
-                    'default' => '#1F2029',
+                    'default' => '#FFFFFF',
                     'var'     => '--rs-why-title',
                 ],
                 'why_text' => [
                     'label'   => 'Couleur du texte',
                     'type'    => 'color',
-                    'default' => '#5C5C5C',
+                    'default' => '#BDBDBD',
                     'var'     => '--rs-why-text',
                 ],
                 'why_icon_bg' => [
                     'label'   => 'Fond des icônes',
                     'type'    => 'color',
-                    'default' => '#FFFFFF',
+                    'default' => '#141414',
                     'var'     => '--rs-why-icon-bg',
                 ],
                 'why_icon' => [
                     'label'   => 'Couleur des icônes',
                     'type'    => 'color',
-                    'default' => '#704F38',
+                    'default' => '#FFD400',
                     'var'     => '--rs-why-icon',
                 ],
                 'why_radius' => [
@@ -663,7 +663,7 @@ return [
                 'footer_bg' => [
                     'label'   => 'Fond',
                     'type'    => 'color',
-                    'default' => '#1F2029',
+                    'default' => '#050505',
                     'var'     => '--rs-footer-bg',
                 ],
                 'footer_heading' => [
@@ -675,19 +675,19 @@ return [
                 'footer_text' => [
                     'label'   => 'Couleur du texte',
                     'type'    => 'color',
-                    'default' => '#B0B1B8',
+                    'default' => '#BDBDBD',
                     'var'     => '--rs-footer-text',
                 ],
                 'footer_link' => [
                     'label'   => 'Couleur des liens',
                     'type'    => 'color',
-                    'default' => '#B0B1B8',
+                    'default' => '#BDBDBD',
                     'var'     => '--rs-footer-link',
                 ],
                 'footer_accent' => [
                     'label'   => 'Couleur d’accent',
                     'type'    => 'color',
-                    'default' => '#C2A691',
+                    'default' => '#FFD400',
                     'var'     => '--rs-footer-accent',
                 ],
                 'footer_description' => ['label' => 'Description', 'type' => 'text', 'content' => 'footer.description', 'group' => 'Contenu du pied de page', 'max' => 300],
@@ -732,7 +732,7 @@ return [
                 'button_bg' => [
                     'label'   => 'Fond des boutons foncés',
                     'type'    => 'color',
-                    'default' => '#1F2029',
+                    'default' => '#FFD400',
                     'var'     => '--rs-btn-bg',
                     'derived' => [
                         ['var' => '--rs-btn-soft', 'alpha' => 0.12],
@@ -741,13 +741,13 @@ return [
                 'button_text' => [
                     'label'   => 'Couleur du texte',
                     'type'    => 'color',
-                    'default' => '#FFFFFF',
+                    'default' => '#080808',
                     'var'     => '--rs-btn-text',
                 ],
                 'button_hover' => [
                     'label'   => 'Couleur au survol',
                     'type'    => 'color',
-                    'default' => '#704F38',
+                    'default' => '#E6BF00',
                     'var'     => '--rs-btn-hover',
                 ],
                 'button_style' => [

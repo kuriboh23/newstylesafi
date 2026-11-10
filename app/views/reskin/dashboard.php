@@ -296,9 +296,9 @@ $renderControlList = static function (array $controls, array $values, array $con
                             title="Charger « <?= e((string) $name) ?> »"
                         >
                             <span class="rs-theme-swatches" aria-hidden="true">
-                                <i data-rs-swatch-color="<?= e((string) ($theme['values']['primary'] ?? '#704F38')) ?>"></i>
-                                <i data-rs-swatch-color="<?= e((string) ($theme['values']['accent'] ?? '#704F38')) ?>"></i>
-                                <i data-rs-swatch-color="<?= e((string) ($theme['values']['background'] ?? '#FFFFFF')) ?>"></i>
+                                <i data-rs-swatch-color="<?= e((string) ($theme['values']['primary'] ?? '#FFD400')) ?>"></i>
+                                <i data-rs-swatch-color="<?= e((string) ($theme['values']['accent'] ?? '#FFD400')) ?>"></i>
+                                <i data-rs-swatch-color="<?= e((string) ($theme['values']['background'] ?? '#080808')) ?>"></i>
                             </span>
                             <span class="rs-theme-name"><?= e((string) $name) ?></span>
                         </button>
@@ -485,9 +485,9 @@ $renderControlList = static function (array $controls, array $values, array $con
                             >
                                 <span class="rs-starter-top">
                                     <span class="rs-starter-swatches" aria-hidden="true">
-                                        <i data-rs-swatch-color="<?= e((string) ($preset['values']['primary'] ?? '#704F38')) ?>"></i>
-                                        <i data-rs-swatch-color="<?= e((string) ($preset['values']['accent'] ?? '#704F38')) ?>"></i>
-                                        <i data-rs-swatch-color="<?= e((string) ($preset['values']['background'] ?? '#FFFFFF')) ?>"></i>
+                                        <i data-rs-swatch-color="<?= e((string) ($preset['values']['primary'] ?? '#FFD400')) ?>"></i>
+                                        <i data-rs-swatch-color="<?= e((string) ($preset['values']['accent'] ?? '#FFD400')) ?>"></i>
+                                        <i data-rs-swatch-color="<?= e((string) ($preset['values']['background'] ?? '#080808')) ?>"></i>
                                     </span>
                                     <span class="rs-starter-action">
                                         <?= $isDefault ? 'Restaurer' : 'Choisir' ?>

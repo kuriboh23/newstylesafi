@@ -1,13 +1,13 @@
-/* RESKIN — theme generated 2026-11-09 15:58 */
+/* RESKIN — theme generated 2026-11-10 18:02 */
 /* Modify it from the RESKIN dashboard, not by hand. */
 
 :root {
-    --primary: #704F38;
-    --primary-soft: rgba(112, 79, 56, 0.08);
-    --rs-offer-glow: rgba(112, 79, 56, 0.18);
+    --primary: #FFD400;
+    --primary-soft: rgba(255, 212, 0, 0.08);
+    --rs-offer-glow: rgba(255, 212, 0, 0.18);
     --rs-bg: #FFFFFF;
-    --rs-text: #1F2029;
-    --rs-accent: #704F38;
+    --rs-text: #F5F5F5;
+    --rs-accent: #FFD400;
     --rs-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --rs-body-size: 15px;
     --rs-line-height: 1.5;
@@ -16,60 +16,60 @@
     --rs-wrap: 1200px;
     --rs-section-space: 28px;
     --radius: 12px;
-    --rs-ann-bg: #FFFFFF;
-    --rs-ann-text: #5C5C5C;
-    --rs-ann-border: #EDEDED;
+    --rs-ann-bg: #050505;
+    --rs-ann-text: #BDBDBD;
+    --rs-ann-border: #292929;
     --rs-ann-height: 40px;
-    --rs-hero-light-bg: #EDEDED;
-    --rs-hero-dark-bg: #1F2029;
-    --rs-hero-dark-bg-2: #343644;
+    --rs-hero-light-bg: #141414;
+    --rs-hero-dark-bg: #0B0B0B;
+    --rs-hero-dark-bg-2: #1C1C1C;
     --rs-hero-radius: 16px;
     --rs-hero-title-size: 22px;
-    --rs-hero-eyebrow: #704F38;
-    --rs-hero-dark-eyebrow: #C2A691;
-    --rs-hero-light-title: #1F2029;
+    --rs-hero-eyebrow: #FFD400;
+    --rs-hero-dark-eyebrow: #FFD400;
+    --rs-hero-light-title: #FFFFFF;
     --rs-hero-dark-title: #FFFFFF;
-    --rs-hero-light-text: #5C5C5C;
-    --rs-hero-dark-text: #C8C9D1;
-    --rs-offer-bg: #F8F1E8;
-    --rs-offer-border: #EADFD2;
+    --rs-hero-light-text: #BDBDBD;
+    --rs-hero-dark-text: #BDBDBD;
+    --rs-offer-bg: #141414;
+    --rs-offer-border: #292929;
     --rs-offer-radius: 20px;
-    --rs-offer-title: #1F2029;
+    --rs-offer-title: #FFFFFF;
     --rs-offer-title-size: 21px;
-    --rs-offer-text: #5C5C5C;
-    --rs-chip-bg: #FFFFFF;
-    --rs-chip-border: #E7DFD5;
-    --rs-chip-text: #1F2029;
-    --rs-chip-icon: #704F38;
+    --rs-offer-text: #BDBDBD;
+    --rs-chip-bg: #0F0F0F;
+    --rs-chip-border: #292929;
+    --rs-chip-text: #F5F5F5;
+    --rs-chip-icon: #FFD400;
     --rs-grid-cols: 4;
     --rs-gap: 12px;
-    --rs-card-bg: #FFFFFF;
-    --rs-card-border: #E7DFD5;
+    --rs-card-bg: #0F0F0F;
+    --rs-card-border: #292929;
     --rs-border-width: 1px;
     --rs-card-radius: 14px;
-    --rs-shadow: 0 1px 2px rgba(27, 26, 24, 0.04);
+    --rs-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     --rs-image-radius: 0px;
     --rs-image-ratio: 3 / 4;
-    --rs-price: #1F2029;
-    --rs-why-bg: #FFFFFF;
-    --rs-why-card-bg: #FFFFFF;
-    --rs-why-line: #E7DFD5;
-    --rs-why-title: #1F2029;
-    --rs-why-text: #5C5C5C;
-    --rs-why-icon-bg: #FFFFFF;
-    --rs-why-icon: #704F38;
+    --rs-price: #FFFFFF;
+    --rs-why-bg: #000000;
+    --rs-why-card-bg: #0F0F0F;
+    --rs-why-line: #292929;
+    --rs-why-title: #FFFFFF;
+    --rs-why-text: #BDBDBD;
+    --rs-why-icon-bg: #141414;
+    --rs-why-icon: #FFD400;
     --rs-why-radius: 18px;
-    --rs-footer-bg: #1F2029;
+    --rs-footer-bg: #050505;
     --rs-footer-heading: #FFFFFF;
-    --rs-footer-text: #B0B1B8;
-    --rs-footer-link: #B0B1B8;
-    --rs-footer-accent: #C2A691;
+    --rs-footer-text: #BDBDBD;
+    --rs-footer-link: #BDBDBD;
+    --rs-footer-accent: #FFD400;
     --rs-btn-radius: 8px;
     --rs-btn-pad-x: 20px;
-    --rs-btn-bg: #1F2029;
-    --rs-btn-soft: rgba(31, 32, 41, 0.12);
-    --rs-btn-text: #FFFFFF;
-    --rs-btn-hover: #704F38;
+    --rs-btn-bg: #FFD400;
+    --rs-btn-soft: rgba(255, 212, 0, 0.12);
+    --rs-btn-text: #080808;
+    --rs-btn-hover: #E6BF00;
 }
 
 /* ==================================================================
@@ -131,8 +131,8 @@ body {
     height: var(--rs-header-h, 65px);
     min-height: var(--rs-header-h, 65px);
     padding-block: 0;
-    background: var(--rs-header-bg, #FFFFFF);
-    border-bottom-color: var(--rs-header-border, #EDEDED);
+    background: var(--rs-header-bg, #080808);
+    border-bottom-color: var(--rs-header-border, #292929);
 }
 
 body[data-rs-sticky="off"] .site-header {
@@ -148,7 +148,7 @@ body[data-rs-sticky="off"] .site-header {
 }
 
 .nav-link {
-    color: var(--rs-nav-color, #1F2029);
+    color: var(--rs-nav-color, #F5F5F5);
 }
 
 .nav-link:hover,
@@ -208,7 +208,7 @@ body[data-rs-sticky="off"] .site-header {
     border-radius: var(--rs-offer-radius);
     background:
         radial-gradient(120% 130% at 100% 0%, var(--rs-offer-glow), transparent 58%),
-        linear-gradient(135deg, var(--rs-offer-bg) 0%, #FCF9F5 55%, #FFFFFF 100%);
+        linear-gradient(135deg, var(--rs-offer-bg) 0%, #0D0D0D 55%, #080808 100%);
 }
 
 body[data-rs-offer="solid"] .offer-panel {
@@ -301,8 +301,8 @@ body[data-rs-hover="on"] .product-card:hover {
 
 /* Keep the original hover depth when the owner did not ask for another one. */
 body[data-rs-hover="on"][data-rs-card="elevated"] .product-card:hover {
-    border-color: #D9C8B6;
-    box-shadow: 0 12px 26px rgba(27, 26, 24, 0.09);
+    border-color: #FFD400;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55);
 }
 
 body[data-rs-hover="off"] .product-card:hover {

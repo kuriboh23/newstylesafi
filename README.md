@@ -1,8 +1,10 @@
-# Shoop Moda Style
+# Newstylesafi
 
-Boutique e-commerce **PHP 8 + MySQL** pour une marque marocaine de mode turque
-(femme & enfant). Panier, favoris et recherches récentes en session, commande
-finale via **WhatsApp** — sans compte client ni paiement en ligne.
+Boutique e-commerce **PHP 8 + MySQL** de mode masculine à Safi, Maroc.
+Panier, favoris et recherches récentes en session, commande finale via
+**WhatsApp** — sans compte client ni paiement en ligne.
+
+Interface en français, devise **DH**, identité visuelle noir et jaune.
 
 ---
 
@@ -22,10 +24,15 @@ Aucune dépendance Composer. Aucun framework JS. Aucune étape de build.
 
 ## Un seul fichier à éditer : `config.php`
 
-Le nom de la boutique, le numéro WhatsApp, la devise, l'accès admin, les textes
-de la page d'accueil **et la connexion MySQL** sont dans `config.php`, à la
-racine du projet. On l'ouvre, on change le texte entre les guillemets, on
-enregistre : c'est tout.
+Le nom de la boutique, le slogan, le numéro WhatsApp, la devise, l'accès admin,
+les textes de la page d'accueil, le seuil de livraison offerte **et la connexion
+MySQL** sont dans `config.php`, à la racine du projet. On l'ouvre, on change le
+texte entre les guillemets, on enregistre : c'est tout.
+
+> ⚠️ **Numéro WhatsApp** — `whatsapp_number` contient un numéro de
+> démonstration (`212600000000`). Il doit être remplacé par le numéro réel de la
+> boutique avant toute mise en ligne : il alimente tous les boutons de commande
+> du site.
 
 Il n'y a **aucun autre fichier de configuration** :
 
@@ -34,10 +41,20 @@ Il n'y a **aucun autre fichier de configuration** :
   requête, donc le site fonctionne à la racine du domaine comme dans un
   sous-dossier, sans rien configurer.
 
+### Identité de marque
+
+- `app_name` : nom complet affiché dans les titres et le pied de page.
+- `brand_split` : préfixe après lequel le nom est coupé en deux couleurs
+  (`New` + `stylesafi`). Laisser vide pour couper au premier espace.
+- Les couleurs vivent dans `assets/css/app.css` (variables `:root`) et
+  `assets/css/brand.css` (peau sombre noir/jaune chargée juste après).
+  Le tableau de bord RESKIN (`/gestion/reskin`) permet d'ajuster les teintes
+  sans toucher au CSS.
+
 ### Comment les liens sont construits
 
 Les pages ont des URLs propres : `/produits`, `/panier`,
-`/produit/robe-longue-sultan`. C'est le fichier `.htaccess` livré à côté de
+`/produit/chemise-lin-safi`. C'est le fichier `.htaccess` livré à côté de
 `index.php` qui s'en charge. Il ne contient que des règles de réécriture :
 `RewriteEngine`, deux `RewriteCond`, un `RewriteRule`, et le blocage des
 dossiers de code. Pas de `Options`, pas de `Require`, pas de `ExpiresByType` :
@@ -74,7 +91,7 @@ partout sans configuration serveur (voir `pretty_urls()` dans
 │   ├── helpers/         functions.php, Helpers, Icons
 │   └── views/           layouts, partials, pages, errors
 ├── storage/             cache + logs
-├── database/            shoopmoda.sql (structure + données)
+├── database/            newstylesafi.sql (structure + données de démo)
 └── tools/               scripts de développement
 ```
 
@@ -85,15 +102,19 @@ partout sans configuration serveur (voir `pretty_urls()` dans
 1. Importer la base :
 
    ```bash
-   mysql -u root -e "CREATE DATABASE shoopmoda CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-   mysql -u root shoopmoda < database/shoopmoda.sql
+   mysql -u root -e "CREATE DATABASE newstylesafi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+   mysql -u root newstylesafi < database/newstylesafi.sql
    ```
+
+   Le dump contient six catégories masculines et **douze produits de
+   démonstration** (images, tailles et couleurs factices). Ils sont là pour
+   vérifier le rendu : remplacez-les depuis l'admin par le vrai catalogue.
 
 2. Ouvrir `config.php` et vérifier la section **C. DATABASE** : sous XAMPP,
    `db_host` = `127.0.0.1`, `db_user` = `root`, `db_pass` = `''` (vide).
 
-3. Ouvrir `http://localhost/shoopmoda/` (ou `http://localhost/` si le dossier
-   est déposé directement dans `htdocs/`). Aucune autre configuration.
+3. Ouvrir `http://localhost/newstylesafi/` (ou `http://localhost/` si le
+   dossier est déposé directement dans `htdocs/`). Aucune autre configuration.
 
 Pendant la mise au point, passer `'app_debug' => true` dans `config.php` pour
 voir les erreurs à l'écran.
@@ -110,8 +131,13 @@ Puis ouvrir `http://127.0.0.1:8080/`.
 
 ## Déploiement (hébergement mutualisé)
 
-Voir [`DEPLOY.md`](DEPLOY.md) : création de la base, import du dump, envoi des
-fichiers dans `htdocs/` et réglages dans `config.php`.
+1. Créer une base MySQL et un utilisateur depuis le panneau de l'hébergeur.
+2. Importer `database/newstylesafi.sql` (ou `database/schema.sql` pour une base
+   vide, sans produits de démonstration).
+3. Renseigner `db_host`, `db_name`, `db_user`, `db_pass` dans `config.php`.
+4. Envoyer tous les fichiers dans `htdocs/` en conservant `.htaccess`.
+5. Vérifier que `storage/` et `uploads/` sont inscriptibles par PHP.
+6. Remplacer le numéro WhatsApp de démonstration et les accès admin.
 
 ---
 
@@ -147,6 +173,8 @@ soumission remplacerait la page en cours.
 - **Langue** : toute l'interface et les messages WhatsApp sont en français.
   Les commentaires du code sont en anglais.
 - **Devise** : DH, formatée par `format_price()`.
+- **Style** : noir profond (`#080808`), surfaces anthracite et jaune
+  (`#FFD400`) en accent. Titres en capitales, image produit en grand format.
 
 ---
 

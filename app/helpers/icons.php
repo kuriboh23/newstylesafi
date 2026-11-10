@@ -83,6 +83,7 @@ final class Icons
             'tshirt'         => '<path d="M6 3 2 6l3 4 2-1v12h10V9l2 1 3-4-4-3a5 5 0 0 1-10 0z"/>',
             'dress'          => '<path d="M9 2h6l-1.2 4.5 4.7 11.2A2.5 2.5 0 0 1 16 21H8a2.5 2.5 0 0 1-2.5-3.3L10.2 6.5 9 2z"/><path d="M9.5 6.5h5"/>',
             'jacket'         => '<path d="M8 3 4 5v5h2.5v11h4V11l1.5-1.5L13.5 11v10h4V10H20V5l-4-2-2.5 3h-3L8 3z"/>',
+            'pants'          => '<path d="M7 3h10l2 18h-5l-2-9-2 9H5L7 3z"/><path d="M7 6h10"/>',
             'moon'           => '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
             'shoe'           => '<path d="M2 17h20v3H2z"/><path d="M2 17c0-3.3 2.2-5 5-5l3.5 1.8L16 12l5 3.5V17"/>',
             'box'            => '<path d="m21 8-9-5-9 5v8l9 5 9-5V8z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/>',

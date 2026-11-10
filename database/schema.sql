@@ -1,5 +1,5 @@
 -- =============================================================
--- Shoop Moda Style — schéma de base de données
+-- Newstylesafi — schéma de base de données
 -- MySQL 8 / MariaDB 10.4+ — utf8mb4
 --
 -- Pas de table `orders` : la commande se termine sur WhatsApp et
@@ -39,7 +39,7 @@ CREATE TABLE `products` (
   `rating` DECIMAL(2,1) NOT NULL DEFAULT 5.0,
   `stock` INT NOT NULL DEFAULT 0,
   `sizes` JSON DEFAULT NULL COMMENT '["S","M","L"]',
-  `colors` JSON DEFAULT NULL COMMENT '[{"name":"Marron","hex":"#704F38"}]',
+  `colors` JSON DEFAULT NULL COMMENT '[{"name":"Noir","hex":"#080808"}]',
   `is_flash` TINYINT(1) NOT NULL DEFAULT 0,
   `is_featured` TINYINT(1) NOT NULL DEFAULT 0,
   `is_active` TINYINT(1) NOT NULL DEFAULT 1,
@@ -83,14 +83,14 @@ CREATE TABLE `settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `settings` (`setting_key`, `setting_value`) VALUES
-  ('store_name', 'Shoop Moda Style'),
+  ('store_name', 'Newstylesafi'),
   ('currency', 'DH'),
-  ('whatsapp_number', '212725605520'),
+  ('whatsapp_number', '212600000000'),
+  ('delivery_fee', '25.00'),
   ('delivery_fee_economy', '25.00'),
   ('delivery_fee_express', '45.00'),
   ('shipping_eta_economy', '3 à 5 jours ouvrables'),
-  ('shipping_eta_express', '24 à 48 heures'),
-  ('flash_sale_end', '2027-01-31 23:59:59');
+  ('shipping_eta_express', '24 à 48 heures');
 
 -- ----------------------------
 -- Codes promo (validés côté serveur)

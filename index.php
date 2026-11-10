@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Shoop Moda Style - single entry point.
+ * Newstylesafi - single entry point.
  *
  * Every request ends up here and is matched against the routes in
  * app/routes.php. The page normally arrives in the URL (/panier), thanks to

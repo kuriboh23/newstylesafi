@@ -8,11 +8,13 @@ declare(strict_types=1);
  * @var string      $email
  * @var string|null $error
  */
+
+[$brandFirst, $brandSecond] = brand_parts();
 ?>
 <div class="admin-auth-card">
     <a class="admin-brand admin-brand--center" href="<?= e(url('/')) ?>">
         <span class="brand-wordmark">
-            <span class="brand-first">Shoop</span><span class="brand-second">Moda</span>
+            <span class="brand-first"><?= e($brandFirst) ?></span><?php if ($brandSecond !== ''): ?><span class="brand-second"><?= e($brandSecond) ?></span><?php endif; ?>
         </span>
         <span class="admin-brand-tag">Gestion</span>
     </a>
