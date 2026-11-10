@@ -1,0 +1,29 @@
+# ==========================================================================
+#  Pretty URLs: /produits instead of /?p=/produits
+# ==========================================================================
+#
+#  This file is optional. If it is missing, the shop still works: links
+#  simply become /?p=/produits (see pretty_urls() in app/helpers/functions.php).
+#
+#  It only contains rewrite rules. There is no "Options", no "Require" and
+#  no "ExpiresByType" here on purpose: those are the directives that free
+#  hosts refuse, and the reason a site can answer 500 while this file exists.
+#
+#  Works at the domain root (htdocs/) and inside a folder (htdocs/shop/).
+#  Nothing to change when you move the site.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Never serve the code, the logs, the SQL dump or this file itself.
+    RewriteRule ^(app|storage|database|tools)(/|$) - [F]
+    RewriteRule ^config\.php$ - [F]
+    RewriteRule ^\.ht - [F]
+
+    # Real files (css, js, images, uploads) and real folders are served as-is.
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Everything else goes to the front controller, which reads the URL.
+    RewriteRule ^ index.php [L]
+</IfModule>
