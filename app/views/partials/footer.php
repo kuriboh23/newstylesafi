@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Footer partial.
  *
  * Categories, description, logo and social link are all editable from the
- * admin / RESKIN, so this template never needs to be touched by the owner.
+ * admin, so this template never needs to be touched by the owner.
  */
 
 $content   = \App\Models\SiteContent::section('footer');

@@ -9,7 +9,7 @@ namespace App\Models;
  *
  * Every text block of the home page, the announcement bar and the footer
  * lives here. Defaults come from config.php, so an untouched installation
- * keeps exactly the same wording. Once the owner edits something from RESKIN
+ * keeps exactly the same wording. Once the owner edits something from the admin
  * or from the admin area, the saved copy in the `settings` table wins.
  *
  * Content is stored as one JSON value, which keeps writes atomic and avoids
@@ -64,7 +64,7 @@ final class SiteContent
     }
 
     /**
-     * Flat path => value map used by the RESKIN dashboard and its preview.
+     * Flat path => value map used by the admin settings screen.
      *
      * @return array<string, string>
      */
@@ -98,7 +98,7 @@ final class SiteContent
        ================================================================== */
 
     /**
-     * Apply a flat path => value map (RESKIN) and persist the result.
+     * Apply a flat path => value map and persist the result.
      *
      * Only paths returned by editable() can be written, so a crafted request
      * cannot add arbitrary keys to the stored JSON.
@@ -179,7 +179,7 @@ final class SiteContent
         )));
 
         // Older installations edited a single message from the admin area.
-        // It still wins as the first message until content is saved from RESKIN.
+        // It still wins as the first message until content is saved.
         $override = trim((string) setting('announcement_text', ''));
 
         if ($override !== '' && !in_array($override, $messages, true)) {
@@ -340,7 +340,7 @@ final class SiteContent
        ================================================================== */
 
     /**
-     * Paths RESKIN is allowed to write, with their length limits.
+     * Paths the admin is allowed to write, with their length limits.
      *
      * @return array<string, array<string, mixed>>
      */

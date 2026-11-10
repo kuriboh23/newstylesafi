@@ -31,7 +31,7 @@ $discount    = $isOnSale ? (int) round((1 - ($price / max($oldPrice, 0.01))) * 1
 $categoryUrl = !empty($product['category_slug']) ? url('/categorie/' . $product['category_slug']) : null;
 ?>
 <section class="wrap product-page">
-    <nav class="breadcrumb" aria-label="Fil d'Ariane">
+    <nav class="breadcrumb" aria-label="Fil d’Ariane">
         <a href="<?= e(url('/')) ?>">Accueil</a>
         <?php if ($categoryUrl !== null): ?>
             <span aria-hidden="true">›</span>
@@ -64,7 +64,7 @@ $categoryUrl = !empty($product['category_slug']) ? url('/categorie/' . $product[
                             type="button"
                             class="gallery-thumb<?= $index === 0 ? ' is-active' : '' ?>"
                             data-img="<?= e(product_image_url((int) $product['id'], $image)) ?>"
-                            aria-label="Voir l'image <?= (int) ($index + 1) ?>"
+                            aria-label="Voir l’image <?= (int) ($index + 1) ?>"
                         >
                             <img src="<?= e(product_image_url((int) $product['id'], $image)) ?>" alt="" loading="lazy" width="80" height="100">
                         </button>

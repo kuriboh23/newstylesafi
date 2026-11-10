@@ -50,7 +50,7 @@ html {
 
 body {
     min-height: 100vh;
-    background: var(--white);
+    background: #FAF6EF;
     color: var(--dark);
     font-family: var(--font);
     font-size: 15px;
@@ -404,7 +404,7 @@ body.drawer-open {
 }
 
 .brand-second {
-    margin-left: 0.34em;
+    margin-left: 0.04em;
     color: var(--primary);
 }
 
@@ -1188,7 +1188,7 @@ body.drawer-open {
 }
 
 .footer-wordmark .brand-second {
-    color: #C2A691;
+    color: #E2A500;
 }
 
 .footer-logo-sub {
@@ -1320,7 +1320,7 @@ body.drawer-open {
 }
 
 .footer-bottom strong {
-    color: #C2A691;
+    color: #E2A500;
     font-weight: 600;
 }
 
@@ -1356,6 +1356,11 @@ body.drawer-open {
 }
 
 @media (min-width: 768px) {
+    /* Les trois visuels tiennent sur une ligne : la pagination n’a plus d’objet. */
+    .hero-dots {
+        display: none;
+    }
+
     :root {
         --pad: 32px;
     }
@@ -2742,22 +2747,22 @@ body.drawer-open {
 }
 /* ==================================================================
    22. Refresh — warm palette, compact cards, sticky buy bar
-   Palette: #A9552F / #1B1A18 / #57524D / #F5F1EB / #FFFFFF
+   Palette: #9C4A26 / #1B1A18 / #554F48 / #F7F2E9 / #FFFFFF
    ================================================================== */
 :root {
-    --primary: #A9552F;
-    --primary-dark: #8B4526;
-    --primary-soft: rgba(169, 85, 47, 0.10);
+    --primary: #9C4A26;
+    --primary-dark: #7E3A1D;
+    --primary-soft: rgba(156, 74, 38, 0.10);
     --dark: #1B1A18;
     --gray: #8C857E;
-    --gray-text: #57524D;
-    --light: #F5F1EB;
-    --line: #E7DFD5;
-    --sale: #C43D2B;
+    --gray-text: #554F48;
+    --light: #F7F2E9;
+    --line: #E6DCCC;
+    --sale: #B3361F;
     --ok: #1F7A46;
     --white: #FFFFFF;
     --whatsapp: #25D366;
-    --star: #F4B740;
+    --star: #E2A500;
 }
 
 /* Header ---------------------------------------------------------- */

@@ -65,7 +65,7 @@ $freeShipping  = $freeThreshold > 0 && $subtotal >= $freeThreshold;
                                         class="qty-btn"
                                         data-action="update"
                                         data-qty="<?= max(0, (int) ($item['quantity'] ?? 1) - 1) ?>"
-                                        aria-label="Diminuer la quantité (retire l'article à zéro)"
+                                        aria-label="Diminuer la quantité (retire l’article à zéro)"
                                     ><?= icon('minus', 'icon icon--sm') ?></button>
                                     <span class="qty-value"><?= (int) ($item['quantity'] ?? 1) ?></span>
                                     <button
@@ -81,7 +81,7 @@ $freeShipping  = $freeThreshold > 0 && $subtotal >= $freeThreshold;
                                     type="button"
                                     class="item-delete"
                                     data-action="remove"
-                                    aria-label="Supprimer l'article"
+                                    aria-label="Supprimer l’article"
                                 ><?= icon('trash', 'icon icon--sm') ?></button>
                             </div>
                         </div>

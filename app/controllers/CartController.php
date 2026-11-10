@@ -19,7 +19,7 @@ final class CartController
 
         View::render('cart', [
             'title'       => 'Panier — ' . store_name(),
-            'description' => 'Récapitulatif de votre commande. Paiement et suivi via WhatsApp.',
+            'description' => 'Récapitulatif de votre commande. Confirmation via WhatsApp.',
             'canonical'   => url('/panier'),
             'cartCount'   => Cart::count(),
             'wishCount'   => Wishlist::count(),

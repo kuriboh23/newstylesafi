@@ -16,3 +16,15 @@
 
 [2026-11-10 17:55:31] PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'newstylesafi.products' doesn't exist in A:\Xampp\htdocs\newstylesafi\app\core\Database.php:115
 
+[2026-11-10 18:16:05] Error: Failed opening required 'A:\Xampp\htdocs\newstylesafi/app/controllers/ReskinController.php' (include_path='A:\Xampp\php\PEAR') in A:\Xampp\htdocs\newstylesafi\app\bootstrap.php:195
+
+[2026-11-10 18:16:08] Error: Failed opening required 'A:\Xampp\htdocs\newstylesafi/app/controllers/ReskinController.php' (include_path='A:\Xampp\php\PEAR') in A:\Xampp\htdocs\newstylesafi\app\bootstrap.php:195
+
+[2026-11-10 18:16:13] Error: Failed opening required 'A:\Xampp\htdocs\newstylesafi/app/controllers/ReskinController.php' (include_path='A:\Xampp\php\PEAR') in A:\Xampp\htdocs\newstylesafi\app\bootstrap.php:195
+
+[2026-11-10 18:16:13] Error: Failed opening required 'A:\Xampp\htdocs\newstylesafi/app/controllers/ReskinController.php' (include_path='A:\Xampp\php\PEAR') in A:\Xampp\htdocs\newstylesafi\app\bootstrap.php:195
+
+[2026-11-10 18:16:14] Error: Failed opening required 'A:\Xampp\htdocs\newstylesafi/app/controllers/ReskinController.php' (include_path='A:\Xampp\php\PEAR') in A:\Xampp\htdocs\newstylesafi\app\bootstrap.php:195
+
+[2026-11-10 18:16:14] Error: Failed opening required 'A:\Xampp\htdocs\newstylesafi/app/controllers/ReskinController.php' (include_path='A:\Xampp\php\PEAR') in A:\Xampp\htdocs\newstylesafi\app\bootstrap.php:195
+

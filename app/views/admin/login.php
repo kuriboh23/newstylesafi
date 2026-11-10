@@ -30,7 +30,7 @@ declare(strict_types=1);
         <?= csrf_field() ?>
 
         <label class="field">
-            <span class="field-label">Email</span>
+            <span class="field-label">Adresse e-mail</span>
             <input
                 type="email"
                 name="email"

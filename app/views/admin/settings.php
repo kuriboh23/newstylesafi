@@ -70,7 +70,12 @@ $logoUrl = $values['logo'] !== '' && is_file(PUBLIC_PATH . '/' . ltrim($values['
             <label class="field">
                 <span class="field-label">Frais de livraison (DH)</span>
                 <input class="input<?= $error('delivery_fee') ?>" type="number" step="0.01" min="0" name="delivery_fee" value="<?= e($values['delivery_fee']) ?>" inputmode="decimal">
-                <span class="field-hint">Offerte automatiquement dès 500 DH.</span>
+                <?php $freeThreshold = (float) config('free_shipping_threshold', 0); ?>
+                <span class="field-hint">
+                    <?= $freeThreshold > 0
+                        ? 'Offerte automatiquement dès ' . e(format_price($freeThreshold)) . '.'
+                        : 'Livraison offerte désactivée.' ?>
+                </span>
                 <?php if (isset($errors['delivery_fee'])): ?><span class="field-error"><?= e($errors['delivery_fee']) ?></span><?php endif; ?>
             </label>
         </div>
@@ -86,10 +91,10 @@ $logoUrl = $values['logo'] !== '' && is_file(PUBLIC_PATH . '/' . ltrim($values['
                 type="tel"
                 name="whatsapp_number"
                 value="<?= e($values['whatsapp_number']) ?>"
-                placeholder="212725605520"
+                placeholder="212600000000"
                 inputmode="tel"
             >
-            <span class="field-hint">Format international, sans + ni espaces (ex. 212725605520).</span>
+            <span class="field-hint">Format international, sans + ni espaces (ex. 212600000000).</span>
             <?php if (isset($errors['whatsapp_number'])): ?><span class="field-error"><?= e($errors['whatsapp_number']) ?></span><?php endif; ?>
         </label>
     </section>
@@ -100,7 +105,7 @@ $logoUrl = $values['logo'] !== '' && is_file(PUBLIC_PATH . '/' . ltrim($values['
         <label class="field">
             <span class="field-label">Message principal</span>
             <input class="input" type="text" name="announcement_text" value="<?= e($values['announcement_text']) ?>" maxlength="140" placeholder="Livraison rapide partout au Maroc">
-            <span class="field-hint">Premier message du bandeau haut. Les autres messages se modifient dans RESKIN → Bandeau.</span>
+            <span class="field-hint">Premier message du bandeau haut du site.</span>
         </label>
     </section>
 

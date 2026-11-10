@@ -4,7 +4,7 @@ Boutique e-commerce **PHP 8 + MySQL** de mode masculine à Safi, Maroc.
 Panier, favoris et recherches récentes en session, commande finale via
 **WhatsApp** — sans compte client ni paiement en ligne.
 
-Interface en français, devise **DH**, identité visuelle noir et jaune.
+Interface en français, devise **DH**, identité visuelle crème et terracotta.
 
 ---
 
@@ -46,10 +46,8 @@ Il n'y a **aucun autre fichier de configuration** :
 - `app_name` : nom complet affiché dans les titres et le pied de page.
 - `brand_split` : préfixe après lequel le nom est coupé en deux couleurs
   (`New` + `stylesafi`). Laisser vide pour couper au premier espace.
-- Les couleurs vivent dans `assets/css/app.css` (variables `:root`) et
-  `assets/css/brand.css` (peau sombre noir/jaune chargée juste après).
-  Le tableau de bord RESKIN (`/gestion/reskin`) permet d'ajuster les teintes
-  sans toucher au CSS.
+- Les couleurs vivent dans `assets/css/app.css` (variables `:root`).
+  Modifier ces variables suffit à ajuster toute la palette du site.
 
 ### Comment les liens sont construits
 
@@ -173,8 +171,9 @@ soumission remplacerait la page en cours.
 - **Langue** : toute l'interface et les messages WhatsApp sont en français.
   Les commentaires du code sont en anglais.
 - **Devise** : DH, formatée par `format_price()`.
-- **Style** : noir profond (`#080808`), surfaces anthracite et jaune
-  (`#FFD400`) en accent. Titres en capitales, image produit en grand format.
+- **Style** : fond crème (`#FAF6EF`), cartes blanches, terracotta
+  (`#9C4A26`) pour les accents, encre chaude (`#1B1A18`). Titres en
+  capitales, image produit en grand format.
 
 ---
 

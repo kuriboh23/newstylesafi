@@ -123,7 +123,7 @@ INSERT INTO `products`
  0, 0, 1);
 
 -- ----------------------------
--- Images (placeholders générés, remplacés via l'admin)
+-- Images (placeholders générés, remplacés via l’admin)
 -- ----------------------------
 INSERT INTO `product_images` (`product_id`, `image_path`, `sort_order`, `is_primary`) VALUES
   (1, 'assets/images/placeholders/t-shirt-coton-essentiel.svg', 1, 1),

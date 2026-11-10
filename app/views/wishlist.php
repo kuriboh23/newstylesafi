@@ -30,7 +30,7 @@ declare(strict_types=1);
         <div class="empty-state">
             <span class="empty-icon"><?= icon('heart', 'icon') ?></span>
             <h2>Aucun favori pour le moment</h2>
-            <p>Cliquez sur le cœur d'une pièce pour la retrouver ici.</p>
+            <p>Cliquez sur le cœur d’une pièce pour la retrouver ici.</p>
             <a class="btn btn--dark btn--compact" href="<?= e(url('/produits')) ?>">Parcourir la collection</a>
         </div>
     <?php endif; ?>

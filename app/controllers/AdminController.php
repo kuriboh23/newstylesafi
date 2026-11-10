@@ -512,7 +512,7 @@ final class AdminController
             isset($_POST['is_active'])
         );
 
-        flash('success', 'Catégorie ajoutée. Elle apparaît maintenant dans le menu, les chips et le pied de page.');
+        flash('success', 'Catégorie ajoutée. Elle apparaît maintenant dans le menu, les filtres et le pied de page.');
         redirect($this->path('categories'));
     }
 

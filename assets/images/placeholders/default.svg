@@ -1,22 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Visuel indisponible — Newstylesafi">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0F0F0F"/>
-      <stop offset="1" stop-color="#080808"/>
+      <stop offset="0" stop-color="#FBF6EE"/>
+      <stop offset="1" stop-color="#F1E6D6"/>
     </linearGradient>
   </defs>
   <rect width="800" height="1000" fill="url(#bg)"/>
-  <circle cx="640" cy="190" r="200" fill="#FFD400" opacity="0.08"/>
-  <circle cx="130" cy="870" r="160" fill="#FFD400" opacity="0.06"/>
-  <rect x="56" y="56" width="688" height="888" rx="4" fill="none" stroke="#292929"/>
+  <circle cx="640" cy="190" r="200" fill="#A9552F" opacity="0.12"/>
+  <circle cx="130" cy="870" r="160" fill="#A9552F" opacity="0.08"/>
+  <rect x="56" y="56" width="688" height="888" rx="4" fill="none" stroke="#E3D5C3"/>
   <text x="400" y="165" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
-        font-size="22" font-weight="800" letter-spacing="8" fill="#FFFFFF">NEW<tspan fill="#FFD400">STYLESAFI</tspan></text>
-  <g fill="none" stroke="#FFD400" stroke-opacity="0.65" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        font-size="22" font-weight="800" letter-spacing="8" fill="#1B1A18">NEW<tspan fill="#9C4A26">STYLESAFI</tspan></text>
+  <g fill="none" stroke="#9C4A26" stroke-opacity="0.7" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
     <path d="M400 400a70 70 0 1 0 0 140 70 70 0 0 0 0-140z"/>
     <path d="m505 545 55 55"/>
   </g>
   <text x="400" y="710" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
-        font-size="26" font-weight="700" letter-spacing="8" fill="#FFFFFF">VISUEL INDISPONIBLE</text>
+        font-size="26" font-weight="700" letter-spacing="8" fill="#1B1A18">VISUEL INDISPONIBLE</text>
   <text x="400" y="860" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
-        font-size="16" letter-spacing="6" fill="#BDBDBD">NEWSTYLESAFI — SAFI, MAROC</text>
+        font-size="16" letter-spacing="6" fill="#7A7160">NEWSTYLESAFI — SAFI, MAROC</text>
 </svg>

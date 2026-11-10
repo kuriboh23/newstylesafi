@@ -45,16 +45,16 @@ function placeholder(array $product, int $variant): string
 
     // Two different compositions for the product gallery.
     if ($variant === 1) {
-        $glow = '<circle cx="640" cy="190" r="210" fill="#FFD400" opacity="0.10"/>'
-            . '<circle cx="120" cy="880" r="170" fill="#FFD400" opacity="0.06"/>';
-        $frame = '<rect x="56" y="56" width="688" height="888" rx="4" fill="none" stroke="#292929"/>'
-            . '<line x1="56" y1="770" x2="744" y2="770" stroke="#292929"/>';
+        $glow = '<circle cx="640" cy="190" r="210" fill="#A9552F" opacity="0.22"/>'
+            . '<circle cx="120" cy="880" r="170" fill="#A9552F" opacity="0.12"/>';
+        $frame = '<rect x="56" y="56" width="688" height="888" rx="4" fill="none" stroke="#E3D5C3"/>'
+            . '<line x1="56" y1="770" x2="744" y2="770" stroke="#E3D5C3"/>';
         $nameY = 650;
     } else {
-        $glow = '<circle cx="150" cy="220" r="180" fill="#FFD400" opacity="0.07"/>'
-            . '<circle cx="690" cy="810" r="220" fill="#FFD400" opacity="0.10"/>';
-        $frame = '<rect x="56" y="56" width="688" height="888" rx="4" fill="none" stroke="#292929"/>'
-            . '<line x1="56" y1="230" x2="744" y2="230" stroke="#292929"/>';
+        $glow = '<circle cx="150" cy="220" r="180" fill="#A9552F" opacity="0.16"/>'
+            . '<circle cx="690" cy="810" r="220" fill="#A9552F" opacity="0.20"/>';
+        $frame = '<rect x="56" y="56" width="688" height="888" rx="4" fill="none" stroke="#E3D5C3"/>'
+            . '<line x1="56" y1="230" x2="744" y2="230" stroke="#E3D5C3"/>';
         $nameY = 680;
     }
 
@@ -62,22 +62,22 @@ function placeholder(array $product, int $variant): string
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="{$alt}">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0F0F0F"/>
-      <stop offset="1" stop-color="#080808"/>
+      <stop offset="0" stop-color="#FBF6EE"/>
+      <stop offset="1" stop-color="#F1E6D6"/>
     </linearGradient>
   </defs>
   <rect width="800" height="1000" fill="url(#bg)"/>
   {$glow}
   {$frame}
   <text x="400" y="165" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
-        font-size="22" font-weight="800" letter-spacing="8" fill="#FFFFFF">NEW<tspan fill="#FFD400">STYLESAFI</tspan></text>
+        font-size="22" font-weight="800" letter-spacing="8" fill="#1B1A18">NEW<tspan fill="#9C4A26">STYLESAFI</tspan></text>
   <text x="400" y="470" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
-        font-size="190" font-weight="800" fill="#FFD400">{$initial}</text>
+        font-size="190" font-weight="800" fill="#9C4A26">{$initial}</text>
   <text x="400" y="{$nameY}" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
-        font-size="30" font-weight="700" letter-spacing="10" fill="#FFFFFF">{$label}</text>
-  <line x1="330" y1="{$nameY}" x2="470" y2="{$nameY}" stroke="#FFD400" stroke-width="2" transform="translate(0 40)"/>
+        font-size="30" font-weight="700" letter-spacing="10" fill="#1B1A18">{$label}</text>
+  <line x1="330" y1="{$nameY}" x2="470" y2="{$nameY}" stroke="#9C4A26" stroke-width="2" transform="translate(0 40)"/>
   <text x="400" y="860" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
-        font-size="16" letter-spacing="6" fill="#BDBDBD">PHOTO À VENIR</text>
+        font-size="16" letter-spacing="6" fill="#7A7160">PHOTO À VENIR</text>
 </svg>
 
 SVG;

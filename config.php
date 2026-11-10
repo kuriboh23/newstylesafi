@@ -67,8 +67,8 @@ return [
     // Country code first, digits only, no "+" and no spaces.
     //
     // !! PLACEHOLDER !! 212600000000 is a stand-in, not a real line.
-    // Replace it with the confirmed Newstylesafi order number (or save it
-    // in RESKIN -> Boutique) before the site goes live.
+    // Replace it with the confirmed Newstylesafi order number before the
+    // site goes live.
     'whatsapp_number' => '212600000000',
 
     // Instagram link in the footer (empty string hides it).
@@ -89,19 +89,6 @@ return [
 
     // Random text used to sign cookies. Any long random string works.
     'cookie_secret' => 'change-this-to-a-long-random-string',
-
-
-    // ======================================================================
-    // B2. RESKIN — OWNER-ONLY DESIGN & STORE INFO
-    // ======================================================================
-    // The editor is at /reskin, with its own password. It contains the design,
-    // the page content and the private shop identity (logo, WhatsApp, delivery,
-    // Instagram). The client admin only opens products and categories.
-    // "Enregistrer" writes assets/css/reskin-theme.css and publishes it;
-    // that file only changes when RESKIN is saved again.
-
-    'reskin_path'     => 'reskin',
-    'reskin_password' => 'thiccolight',
 
 
     // ======================================================================
@@ -164,7 +151,7 @@ return [
             'text'    => 'Des coupes propres et des matières agréables, au quotidien.',
             'cta'     => 'Voir la sélection',
             'link'    => '/categorie/chemises',
-            'theme'   => 'light',
+            'theme'   => 'dark',
         ],
         [
             'eyebrow' => 'Safi, Maroc',
@@ -172,7 +159,7 @@ return [
             'text'    => 'Choisissez vos tailles et vos couleurs, puis envoyez votre commande.',
             'cta'     => 'Voir la boutique',
             'link'    => '/produits',
-            'theme'   => 'dark',
+            'theme'   => 'light',
         ],
     ],
 

@@ -59,13 +59,13 @@ $categoryIcon = static function (array $category): string {
         <?php endforeach; ?>
     </div>
 
-    <div class="hero-dots" role="group" aria-label="Choisir une promotion">
+    <div class="hero-dots" role="group" aria-label="Choisir une diapositive">
         <?php foreach ($slides as $index => $slide): ?>
             <button
                 type="button"
                 class="hero-dot<?= $index === 0 ? ' is-active' : '' ?>"
                 data-slide="<?= (int) $index ?>"
-                aria-label="Promotion <?= (int) ($index + 1) ?> : <?= e($slide['title'] ?? '') ?>"
+                aria-label="Diapositive <?= (int) ($index + 1) ?> : <?= e($slide['title'] ?? '') ?>"
                 <?= $index === 0 ? 'aria-current="true"' : '' ?>
             ></button>
         <?php endforeach; ?>
